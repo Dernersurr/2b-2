@@ -1,0 +1,16 @@
+﻿  Clock.cpp
+  Event.cpp
+  EventStep.cpp
+  game.cpp
+  GameManager.cpp
+  LogManager.cpp
+  Manager.cpp
+  Object.cpp
+  ObjectList.cpp
+  ObjectListIterator.cpp
+  utility.cpp
+  Vector.cpp
+C:\Users\User\source\repos\Project2\Project2\Vector.cpp(32,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  WorldManager.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(1096,5): error MSB6006: "link.exe" exited with code 1181.
+LINK : fatal error LNK1181: cannot open input file 'sfml-system.lib'

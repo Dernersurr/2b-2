@@ -1,0 +1,209 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "Function uses '40008' bytes of stack.  Consider moving some data to heap."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Project2/Project2/WorldManager.cpp"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 23
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "df::WorldManager::{ctor}",
+                  "decoratedName": "??0WorldManager@df@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "Function uses '40008' bytes of stack.  Consider moving some data to heap."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Project2/Project2/WorldManager.cpp"
+                },
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 25
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "df::WorldManager::{ctor}",
+                  "decoratedName": "??0WorldManager@df@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "Function uses '40032' bytes of stack.  Consider moving some data to heap."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Project2/Project2/WorldManager.cpp"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 21,
+                  "endLine": 23,
+                  "endColumn": 21
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "df::WorldManager::shutDown",
+                  "decoratedName": "?shutDown@WorldManager@df@@UEAAXXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "Function uses '40136' bytes of stack.  Consider moving some data to heap."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Project2/Project2/WorldManager.cpp"
+                },
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 27,
+                  "endLine": 48,
+                  "endColumn": 27
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "df::WorldManager::objectsOfType",
+                  "decoratedName": "?objectsOfType@WorldManager@df@@QEBA?AVObjectList@2@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.34.31937.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Project2/Project2/WorldManager.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "ff5e58de5343d296eb9b80e24cf328cadcc9da1c3b7f6a51160b274d7e4014da"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/worldmanager.h"
+          },
+          "hashes": {
+            "sha-256": "0ca09ec7d9a1cbb05ca71d2f0ff9f65a8e0e17f66432dc026f7abea31f92c54d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/manager.h"
+          },
+          "hashes": {
+            "sha-256": "a77e4548229e764f0e0b822d87ddd4b45b791e4d96596d495f917c9fe5ef88f5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/event.h"
+          },
+          "hashes": {
+            "sha-256": "ca4316aabab6561a89a712ec9476c2be712dbdc74561f8691d4342ef3db00bcf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/object.h"
+          },
+          "hashes": {
+            "sha-256": "66008c86f7f831b4e793b954a8aec2d6fe4e0958584d6942d7c9189725d60a4d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/vector.h"
+          },
+          "hashes": {
+            "sha-256": "98fa6ed2a00360b66735a101eeff3f6c8970aec2ad2127168021a0a8b16e7200"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/objectlist.h"
+          },
+          "hashes": {
+            "sha-256": "43b8776eb56932da452ba738d7be5373e14944c9ab3acce51a4b165bb2aa52bc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/objectlistiterator.h"
+          },
+          "hashes": {
+            "sha-256": "002540d7811bd71c323ed3239548f972679dd0b8d1ae0a48ccfaf86ab958eae7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/logmanager.h"
+          },
+          "hashes": {
+            "sha-256": "e5cdfbb2b3b8873cce8e7d978a32a9c402868ad244344c7876c33e0b3fc1ce9b"
+          }
+        }
+      ]
+    }
+  ]
+}

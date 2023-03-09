@@ -1,0 +1,121 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6271",
+          "message": {
+            "text": "Extra argument passed to 'printf'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Project2/Project2/LogManager.cpp"
+                },
+                "region": {
+                  "startLine": 60,
+                  "startColumn": 3,
+                  "endLine": 60,
+                  "endColumn": 16
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "df::LogManager::writeLog",
+                  "decoratedName": "?writeLog@LogManager@df@@QEBAHPEBDZZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.34.31937.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Project2/Project2/LogManager.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "10466df919cf913ffadc9497435631622a5c224e0580286fcb69a39356a8003f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/logmanager.h"
+          },
+          "hashes": {
+            "sha-256": "e5cdfbb2b3b8873cce8e7d978a32a9c402868ad244344c7876c33e0b3fc1ce9b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/manager.h"
+          },
+          "hashes": {
+            "sha-256": "a77e4548229e764f0e0b822d87ddd4b45b791e4d96596d495f917c9fe5ef88f5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/event.h"
+          },
+          "hashes": {
+            "sha-256": "ca4316aabab6561a89a712ec9476c2be712dbdc74561f8691d4342ef3db00bcf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/object.h"
+          },
+          "hashes": {
+            "sha-256": "66008c86f7f831b4e793b954a8aec2d6fe4e0958584d6942d7c9189725d60a4d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/vector.h"
+          },
+          "hashes": {
+            "sha-256": "98fa6ed2a00360b66735a101eeff3f6c8970aec2ad2127168021a0a8b16e7200"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/objectlist.h"
+          },
+          "hashes": {
+            "sha-256": "43b8776eb56932da452ba738d7be5373e14944c9ab3acce51a4b165bb2aa52bc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/project2/project2/objectlistiterator.h"
+          },
+          "hashes": {
+            "sha-256": "002540d7811bd71c323ed3239548f972679dd0b8d1ae0a48ccfaf86ab958eae7"
+          }
+        }
+      ]
+    }
+  ]
+}
