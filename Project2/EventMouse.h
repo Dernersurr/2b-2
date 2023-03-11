@@ -10,7 +10,7 @@
 A specialized event that is broadcast when an object leaves the screen
 */
 namespace df {
-    const std::string MOUSE_EVENT = "df::mouse";
+    const std::string MSE_EVENT = "df::mouse";
 
     enum EventMouseAction {
         UNDEFINED_MOUSE_ACTION = -1,

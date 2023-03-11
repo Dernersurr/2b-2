@@ -20,9 +20,11 @@
 #include "Saucer.h"
 #include <iostream> // for std::cout
 #include <SFML/Graphics.hpp>
+#include "Hero.h"
+#include "Star.h"
 
 
-int main() {
+/*int main() {
 	void generalTesting();
 	// Load font.
 	sf::Font font;
@@ -85,7 +87,7 @@ void generalTesting();
 	//worldManagerTests();
 
 //}
-
+*/
 bool logManagerTests() {
 	df::LogManager& log_manager = df::LogManager::getInstance();
 	LM.startUp();
@@ -209,3 +211,44 @@ void generalTesting() {
 
 
 }
+
+
+
+void populateWorld(void);
+
+int main(int argc, char* argv[]) {
+
+
+	if (GM.startUp()) {
+		LM.writeLog("Error starting game manager!");
+		GM.shutDown();
+		return 1;
+	}
+
+
+	LM.setFlush(true);
+
+
+	populateWorld();
+
+
+	GM.run();
+
+
+	GM.shutDown();
+
+	return 0;
+}
+
+
+// Populate world with some objects.
+void populateWorld(void) {
+
+	// Spawn some Stars.
+	for (int i = 0; i < 16; i++)
+		new Star;
+
+	// Create GameStart object.
+	new Hero();
+}
+

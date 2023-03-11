@@ -1,9 +1,12 @@
 #include "WorldManager.h"
 #include "LogManager.h"
 #include "ObjectList.h"
+#include "ObjectListIterator.h"
 #include "DisplayManager.h"
 #include "EventOut.h"
 #include "Event.h"
+#include "Box.h"
+#include "utility.h"
 
 namespace df {
 
@@ -19,7 +22,7 @@ namespace df {
 	WorldManager& WorldManager::getInstance() {
 		static WorldManager world_manager;
 		return world_manager;
-	} 
+	}
 	int WorldManager::startUp() {
 		Manager::startUp();
 		return 0;
@@ -82,7 +85,16 @@ namespace df {
 		deletions.insert(p_o);
 		return 0;
 	}
-	/*void df::WorldManager::draw() {
+
+	Box WorldManager::getBoundary() {
+		return boundary;
+	}
+
+	void WorldManager::setBoundary(Box new_boundary) {
+		boundary = new_boundary;
+	}
+
+	void df::WorldManager::draw() {
 		ObjectListIterator list_iter(&updates);
 
 		for (int altitude = 0; altitude <= MAX_ALTITUDE; altitude++) {
@@ -93,5 +105,27 @@ namespace df {
 			}
 		}
 	}
-	*/
+
+
+	ObjectList WorldManager::getCollisions(const Object* p_o, Vector where) {
+		// Make empty l i s t .
+		ObjectList collision_list;
+		ObjectListIterator list_iter(&updates);
+		// I t e r a t e t h r o u g h a l l O b j e c t s .
+		//ObjectListIterator i on m_updates list;
+
+		while (list_iter.isDone() != true) {
+
+			Object* p_temp_o = list_iter.currentObject();
+			if (p_temp_o != p_o) {
+				// Same l o c a t i o n and b o t h s o l i d ?
+				if (positionsIntersect(p_temp_o->getPosition(), where) && p_temp_o->isSolid()) {
+
+					collision_list.insert(p_temp_o);
+				};
+			}
+			list_iter.next();
+		};
+		return collision_list;
+	}
 }

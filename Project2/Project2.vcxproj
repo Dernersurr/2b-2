@@ -19,16 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="EventCollision.h" />
     <ClInclude Include="EventKeyboard.h" />
     <ClInclude Include="EventMouse.h" />
+    <ClInclude Include="EventNuke.h" />
     <ClInclude Include="EventOut.h" />
     <ClInclude Include="EventStep.h" />
+    <ClInclude Include="Explosion.h" />
     <ClInclude Include="Floop.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameOver.h" />
+    <ClInclude Include="Hero.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="IntList.h" />
     <ClInclude Include="IntListIterator.h" />
@@ -37,29 +44,38 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectList.h" />
     <ClInclude Include="ObjectListIterator.h" />
+    <ClInclude Include="Reticle.h" />
     <ClInclude Include="Saucer.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Star.h" />
     <ClInclude Include="utility.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="WorldManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventCollision.cpp" />
     <ClCompile Include="EventKeyboard.cpp" />
     <ClCompile Include="EventMouse.cpp" />
     <ClCompile Include="EventOut.cpp" />
     <ClCompile Include="EventStep.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Hero.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectList.cpp" />
     <ClCompile Include="ObjectListIterator.cpp" />
+    <ClCompile Include="Reticle.cpp" />
     <ClCompile Include="Saucer.cpp" />
+    <ClCompile Include="Star.cpp" />
     <ClCompile Include="utility.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="WorldManager.cpp" />

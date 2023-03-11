@@ -4,6 +4,7 @@
 #include "WorldManager.h"
 #include "Vector.h"
 #include "DisplayManager.h"
+#include "Box.h"
 
 namespace df {
 	Object::Object() {
@@ -81,7 +82,23 @@ namespace df {
 		return m_speed;
 	}
 
-	void df::Object::draw(){
+	int df::Object::draw(){
+		if (true){
+			return 0;
+		}
+		else {
+			return -1;
+		}
+	}
+	void Object::setBox(Box new_box) {
+
+		box = new_box;
+
 	}
 
+	Box Object::getBox() {
+
+		return box;
+
+	}
 }

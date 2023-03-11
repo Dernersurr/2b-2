@@ -4,6 +4,7 @@
 
 #include "Manager.h"
 #include "ObjectList.h"
+#include "Box.h"
 
 namespace df {
 
@@ -17,6 +18,9 @@ namespace df {
 		void operator=(WorldManager const&);
 		ObjectList updates;
 		ObjectList deletions;
+		Box boundary;				//World boundary
+		Box view;					//Player view of game world
+		Object* p_view_following;
 	public:
 		static WorldManager& getInstance();
 		int startUp();
@@ -40,6 +44,13 @@ namespace df {
 		int markForDelete(Object* p_o);
 
 		void draw();
+
+		Box getBoundary();					//Get game world boundary
+		void setBoundary(Box new_boundary);	//Set game world boundary
+
+		Box getView();
+
+		ObjectList getCollisions(const Object* p_o, Vector where);
 	};
 
 }
