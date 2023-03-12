@@ -5,21 +5,17 @@
 #include "Clock.h"
 #include "GameManager.h"
 #include "Vector.h"
-#include "Object.h"
-#include "ObjectList.h"
 #include "ObjectListIterator.h"
 #include "Event.h"
 #include "EventStep.h"
 #include "WorldManager.h"
 #include "Hero.h"
+#include "Star.h"
+#include "Saucer.h"
+#include "GameOver.h"
 
 #include <iostream> // for std::cout
 #include <SFML/Graphics.hpp>
-
-
-int main() {
-	void generalTesting();
-}; // End of main().
 
 //bool logManagerTests();
 //void worldManagerTests();
@@ -149,4 +145,34 @@ void generalTesting() {
 	LM.writeLog("Event new type: %s\n", event.getType().c_str());
 
 
+}
+void populateWorld();
+
+int main(int argc, char* argv[]) {
+
+
+	if (GM.startUp()) {
+		LM.writeLog("Error starting game manager!");
+		GM.shutDown();
+		return 1;
+	}
+
+
+	LM.setFlush(true);
+
+	void populateWorld();
+
+	GM.run();
+
+	GameOver();
+	return 0;
+}
+void populateWorld() {
+
+	// Spawn some Stars.
+	for (int i = 0; i < 16; i++)
+		new Star;
+
+	// Create GameStart object.
+	new Hero();
 }

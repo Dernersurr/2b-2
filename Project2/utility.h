@@ -22,7 +22,7 @@ namespace df {
 	bool valueInRange(float value, float min, float max);
 
 	/// Convert relative bounding Box for Object to absolute world Box.
-	Box getWorldBox(const Object* p_o);
+	Box getWorldBox(Object* p_o);
 
 	/// Convert relative bounding Box for Object to absolute world Box
 	/// at postion where.
