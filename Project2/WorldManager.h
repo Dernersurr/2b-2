@@ -1,26 +1,25 @@
-# pragma 
 #ifndef __WORLD_MANAGER_H__
 #define __WORLD_MANAGER_H__
 
 #include "Manager.h"
 #include "ObjectList.h"
 #include "Box.h"
+#include "SceneGraph.h"
+#include "Object.h"
+#include "utility.h"
+
+#define MAX_ALTITUDE 4
 
 namespace df {
 
-	const int MAX_ALTITUDE = 5;
-
 	class WorldManager :public Manager {
-#define WM df :: WorldManager :: getInstance ()
+#define WM df::WorldManager::getInstance ()
 	private:
 		WorldManager();
 		WorldManager(WorldManager const&);
 		void operator=(WorldManager const&);
 		ObjectList updates;
 		ObjectList deletions;
-		Box boundary;				//World boundary
-		Box view;					//Player view of game world
-		Object* p_view_following;
 	public:
 		static WorldManager& getInstance();
 		int startUp();
@@ -43,14 +42,12 @@ namespace df {
 
 		int markForDelete(Object* p_o);
 
+		ObjectList getCollisions(Object* p_o, Vector where) const;
+
 		void draw();
 
-		Box getBoundary();					//Get game world boundary
-		void setBoundary(Box new_boundary);	//Set game world boundary
+		SceneGraph& getSceneGraph();
 
-		Box getView();
-
-		ObjectList getCollisions(const Object* p_o, Vector where);
 	};
 
 }

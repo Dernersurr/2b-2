@@ -39,13 +39,14 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="IntList.h" />
     <ClInclude Include="IntListIterator.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="LogManager.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectList.h" />
     <ClInclude Include="ObjectListIterator.h" />
     <ClInclude Include="Reticle.h" />
-    <ClInclude Include="Saucer.h" />
+    <ClInclude Include="SceneGraph.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Star.h" />
     <ClInclude Include="utility.h" />
@@ -61,11 +62,13 @@
     <ClCompile Include="EventCollision.cpp" />
     <ClCompile Include="EventKeyboard.cpp" />
     <ClCompile Include="EventMouse.cpp" />
+    <ClCompile Include="EventNuke.cpp" />
     <ClCompile Include="EventOut.cpp" />
     <ClCompile Include="EventStep.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LogManager.cpp" />
@@ -75,6 +78,7 @@
     <ClCompile Include="ObjectListIterator.cpp" />
     <ClCompile Include="Reticle.cpp" />
     <ClCompile Include="Saucer.cpp" />
+    <ClCompile Include="SceneGraph.cpp" />
     <ClCompile Include="Star.cpp" />
     <ClCompile Include="utility.cpp" />
     <ClCompile Include="Vector.cpp" />

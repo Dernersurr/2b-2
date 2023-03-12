@@ -4,7 +4,7 @@
 #include "WorldManager.h"
 #include "Vector.h"
 #include "DisplayManager.h"
-#include "Box.h"
+#include "utility.h"
 
 namespace df {
 	Object::Object() {
@@ -15,6 +15,10 @@ namespace df {
 		m_position = Vector();
 		WorldManager& world_manager = WorldManager::getInstance();
 		world_manager.insertObject(this);
+		m_altitude = 0;
+		solidness;
+		m_box;
+
 	}
 	Object::~Object() {
 		WorldManager& world_manager = WorldManager::getInstance();
@@ -83,22 +87,69 @@ namespace df {
 	}
 
 	int df::Object::draw(){
-		if (true){
+		if (true)
+		{
 			return 0;
 		}
-		else {
+		else{
 			return -1;
 		}
 	}
-	void Object::setBox(Box new_box) {
 
-		box = new_box;
+	bool df::Object::isSolid() const {
+		return getSolidness() == Solidness::HARD || getSolidness() == Solidness::SOFT;
+	}
+	
 
+	int Object::setSolidness(Solidness new_solid) {
+		df::ObjectList collisionsList = df::WorldManager::getInstance().isCollision(this, getPosition());
+
+		if (collisionsList.getCount() != 0) {
+			ObjectListIterator coll_iter(&collisionsList);
+			for (coll_iter.first(); !coll_iter.isDone(); coll_iter.next()) {
+				auto p_temp_o = coll_iter.currentObject();
+				if (getSolidness() == Solidness::HARD && p_temp_o->getSolidness() == Solidness::HARD) {
+					return -1;
+				}
+			}
+		}
+
+		solidness = new_solid;
+		return 0;
 	}
 
-	Box Object::getBox() {
+Solidness Object::getSolidness()const {
 
-		return box;
+	return solidness;
 
+}
+
+int Object::setAltitude(int new_altitude) {
+
+	if (!valueInRange(new_altitude, 0, MAX_ALTITUDE)) {
+		return -1;
 	}
+	WorldManager& worldmanager = WorldManager::getInstance();
+	worldmanager.getSceneGraph().updateAltitude(this, new_altitude);
+	m_altitude = new_altitude;
+
+	return 0;
+
+}
+
+int Object::getAltitude() const{
+
+	return m_altitude;
+
+}
+	
+void Object::setBox(Box new_box) {
+
+	m_box = new_box;
+
+}
+
+Box Object::getBox() {
+	return m_box;
+}
 }

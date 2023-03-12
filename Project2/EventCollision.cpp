@@ -1,59 +1,37 @@
+
 #include "EventCollision.h"
-#include "LogManager.h"
+#include "Object.h"
+#include "Vector.h"
 
-//Misc required headers
-namespace df {
-	EventCollision::EventCollision() {
 
-		pos = Vector();
-		p_obj1 = NULL;
-		p_obj2 = NULL;
-		setType(COLLISION_EVENT);
+df::EventCollision::EventCollision(df::Object* p_o1, df::Object* p_o2, Vector p) {
+	m_p_obj1 = p_o1;
+	m_p_obj2 = p_o2;
+	m_pos = p;
+}
 
-	}
+df::EventCollision::EventCollision() : df::EventCollision::EventCollision(nullptr, nullptr, df::Vector()) {}
 
-	EventCollision::EventCollision(Object* p_o1, Object* p_o2, Vector p) {
+void df::EventCollision::setObject1(df::Object* p_new_o1) {
+	m_p_obj1 = p_new_o1;
+}
 
-		pos = p;
-		p_obj1 = p_o1;
-		p_obj2 = p_o2;
-		setType(COLLISION_EVENT);
+df::Object* df::EventCollision::getObject1() const {
+	return m_p_obj1;
+}
 
-	}
+void df::EventCollision::setObject2(df::Object* p_new_o2) {
+	m_p_obj2 = p_new_o2;
+}
 
-	Object* EventCollision::getObject1() const{
+df::Object* df::EventCollision::getObject2() const {
+	return m_p_obj2;
+}
 
-		return p_obj1;
+void df::EventCollision::setPosition(df::Vector new_pos) {
+	m_pos = new_pos;
+}
 
-	}
-
-	void EventCollision::setObject1(Object* p_new_o1) {
-
-		p_obj1 = p_new_o1;
-
-	}
-
-	Object* EventCollision::getObject2() const{
-
-		return p_obj2;
-
-	}
-
-	void EventCollision::setObject2(Object* p_new_o2) {
-
-		p_obj2 = p_new_o2;
-
-	}
-
-	Vector EventCollision::getVector() {
-
-		return pos;
-
-	}
-
-	void EventCollision::setVector(Vector new_pos) {
-
-		pos = new_pos;
-
-	}
+df::Vector df::EventCollision::getPosition() const {
+	return m_pos;
 }

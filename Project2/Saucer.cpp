@@ -47,7 +47,7 @@ int Saucer::eventHandler(const df::Event* p_e) {
         return 1;
     }
 
-    if (p_e->getType() == COLLISION_EVENT) {
+    if (p_e->getType() == df::COLLISION_EVENT) {
         const df::EventCollision* p_collision_event = dynamic_cast <const df::EventCollision*> (p_e);
         hit(p_collision_event);
         return 1;
@@ -135,7 +135,6 @@ void Saucer::moveToStart() {
         temp_pos.setX(temp_pos.getX() + 1.0f);
         collision_list = WM.getCollisions(this, temp_pos);
     }
-
     WM.moveObject(this, temp_pos);
 }
 

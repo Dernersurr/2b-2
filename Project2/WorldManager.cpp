@@ -1,13 +1,9 @@
 #include "WorldManager.h"
 #include "LogManager.h"
-#include "ObjectList.h"
-#include "ObjectListIterator.h"
 #include "DisplayManager.h"
 #include "EventOut.h"
 #include "Event.h"
-#include "Box.h"
-#include "utility.h"
-
+#include "EventCollision.h"
 namespace df {
 
 	WorldManager::WorldManager() {
@@ -85,15 +81,6 @@ namespace df {
 		deletions.insert(p_o);
 		return 0;
 	}
-
-	Box WorldManager::getBoundary() {
-		return boundary;
-	}
-
-	void WorldManager::setBoundary(Box new_boundary) {
-		boundary = new_boundary;
-	}
-
 	void df::WorldManager::draw() {
 		ObjectListIterator list_iter(&updates);
 
@@ -105,27 +92,106 @@ namespace df {
 			}
 		}
 	}
-
-
-	ObjectList WorldManager::getCollisions(const Object* p_o, Vector where) {
-		// Make empty l i s t .
-		ObjectList collision_list;
-		ObjectListIterator list_iter(&updates);
-		// I t e r a t e t h r o u g h a l l O b j e c t s .
-		//ObjectListIterator i on m_updates list;
-
-		while (list_iter.isDone() != true) {
-
-			Object* p_temp_o = list_iter.currentObject();
-			if (p_temp_o != p_o) {
-				// Same l o c a t i o n and b o t h s o l i d ?
-				if (positionsIntersect(p_temp_o->getPosition(), where) && p_temp_o->isSolid()) {
-
-					collision_list.insert(p_temp_o);
-				};
-			}
-			list_iter.next();
-		};
-		return collision_list;
+	bool positionsIntersect(Vector p1, Vector p2) {
+		if (p1.getX() == p2.getX() && p1.getY() == p2.getY()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
+	ObjectList df::WorldManager::isCollision(Object* p_o, Vector where) {
+		ObjectList collisionList;
+		ObjectListIterator updates_list_iter(&updates);
+		for (updates_list_iter.first(); !updates_list_iter.isDone(); updates_list_iter.next()) {
+			Object* p_temp_o = updates_list_iter.currentObject();
+			if (p_temp_o != p_o) {
+				if (positionsIntersect(p_temp_o->getPosition(), where) && p_temp_o->isSolid()) {
+					collisionList.insert(p_temp_o);
+				}
+			}
+		}
+		return collisionList;
+	}
+
+
+	ObjectList WorldManager::getCollisions(Object* p_o, Vector where) const {
+		ObjectList collisionList;
+		ObjectListIterator updates_list_iter(&updates);
+		for (updates_list_iter.first(); !updates_list_iter.isDone(); updates_list_iter.next()) {
+			Object* p_temp_o = updates_list_iter.currentObject();
+			if (p_temp_o != p_o) {
+				if (positionsIntersect(p_temp_o->getPosition(), where) && positionsIntersect(p_o->getPosition(),where)) {
+					getWorldBox(p_temp_o);
+					collisionList.insert(p_temp_o);
+				}
+			}
+			return collisionList;
+		}
+	}
+
+	df::SceneGraph& df::WorldManager::getSceneGraph() {
+		SceneGraph scene_graph;
+		return scene_graph;
+
+	}
+
+
+	int WorldManager::moveObject(Object* p_o, Vector where) {
+
+		bool doMove = true;
+
+		if (p_o->isSolid()) {
+			ObjectList collisions = isCollision(p_o, where);
+			if (!collisions.isEmpty()) {
+				ObjectListIterator i(&collisions);
+				while (!i.isDone()) {
+					Object* p_temp_o = i.currentObject();
+
+					EventCollision c(p_o, p_temp_o, where);
+					p_o->eventHandler(&c);
+					p_temp_o->eventHandler(&c);
+
+					if (p_temp_o->getSolidness() == HARD &&
+						p_o->getSolidness() == HARD) {
+						doMove = false; //Collision with hard solid
+					}
+					i.next();
+				}//End iterate
+
+				if (!doMove) {
+					return -1; //Can not move
+				}
+
+			}//No collisions
+		}//Not solid
+
+		Vector prev_pos = p_o->getPosition();
+		p_o->setPosition(where);
+
+		//Check for out of bounds
+		bool out;
+		DisplayManager& displaymanager = DisplayManager::getInstance();
+		int xBorder = displaymanager.getHorizontal();
+		int yBorder = displaymanager.getVertical();
+		if (prev_pos.getX() >= 0 && where.getX() < 0) {
+			out = true; //Went out the left side
+		}
+		else if (prev_pos.getX() <= xBorder && where.getX() > xBorder) {
+			out = true; //Went out the right side
+		}
+		else if (prev_pos.getY() >= 0 && where.getY() < 0) {
+			out = true; //Went out the top side
+		}
+		else if (prev_pos.getY() <= yBorder && where.getY() > yBorder) {
+			out = true; //Went out the bottom side
+		}
+		if (out == true) {
+			EventOut ov = EventOut();
+			p_o->eventHandler(&ov);
+		}
+		return 0; //Successful move
+
+	}
+
 }

@@ -12,12 +12,12 @@
 
 namespace df {
 	enum Solidness {
-		HARD,     //Objects cause collisions and impede.
-		SOFT,     //Objects cause collisions, but don't impede.
-		SPECTRAL  //Objects don't cause collisions.
+		HARD,     // Objects cause collisions and impede.
+		SOFT,     // Objects cause collisions, but don't impede.
+		SPECTRAL  // Objects don't cause collisions.
 	};
 	class Object {
-
+		
 	private:
 		int m_id;
 		std::string m_type;
@@ -25,8 +25,8 @@ namespace df {
 		Vector m_direction;
 		float m_speed;
 		int m_altitude;
-		Box box;
 		Solidness solidness;
+		Box m_box;
 
 	public:
 		Object();
@@ -45,11 +45,13 @@ namespace df {
 
 		virtual int eventHandler(const Event* p_e);
 		
-		enum Solidness {
-			HARD,     // Objects cause collisions and impede.
-			SOFT,     // Objects cause collisions, but don't impede.
-			SPECTRAL  // Objects don't cause collisions.
-		};
+		Box getBox();
+		void setBox(Box new_box);
+		
+		
+		bool isSolid() const;
+		int setSolidness(Solidness new_solid); //Sets solidness, returns 0 if ok, -1 if inconsisent.
+		Solidness getSolidness() const;
 
 		int setAltitude(int new_altitude);
 		int getAltitude() const;
@@ -66,13 +68,8 @@ namespace df {
 		Vector predictPosition();
 
 		virtual int draw();
-		Box getBox();
 
-		void setBox(Box new_box);
 
-		bool isSolid();								//Returns true if HARD or SOFT
-		int setSolidness(Solidness new_solid);		//Set solidness
-		Solidness getSolidness();
 	};
 }
 

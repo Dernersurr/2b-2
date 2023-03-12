@@ -13,7 +13,6 @@
 #include "Bullet.h"
 #include "Saucer.h"
 
-
 Bullet::Bullet(df::Vector hero_pos) {
 
     // Set object properties.
@@ -34,7 +33,7 @@ int Bullet::eventHandler(const df::Event* p_e) {
         return 1;
     }
 
-    if (p_e->getType() == COLLISION_EVENT) {
+    if (p_e->getType() == df::COLLISION_EVENT) {
         const df::EventCollision* p_collision_event = dynamic_cast <const df::EventCollision*> (p_e);
         hit(p_collision_event);
         return 1;

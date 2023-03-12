@@ -5,10 +5,10 @@
 
 
 #include "Event.h"
-const std::string KEYBOARD_EVENT = "df::keyboard";
 
 namespace df {
-	
+	const std::string KEYBOARD_EVENT = "df::keyboard";
+
 	// Types of keyboard actions Dragonfly recognizes.
 	enum EventKeyboardAction {
 		UNDEFINED_KEYBOARD_ACTION = -1, // Undefined

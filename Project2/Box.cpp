@@ -1,47 +1,44 @@
 #include "Box.h"
 #include "Vector.h"
+#include "Object.h"
+//Misc required headers
 
+namespace df {
+	Box::Box(Vector init_corner, int init_horizontal, int init_vertical) {
+
+		m_horizontal = init_horizontal;
+		m_vertical = init_vertical;
+		m_corner = init_corner;
+	}
 
 	
-	Box::Box(df::Vector init_corner, int init_horizontal, int init_vertical) {
-		horizontal = init_horizontal;
-		vertical = init_vertical;
-		corner = init_corner;
+
+	Vector Box::getCorner() const {
+		return m_corner;
+	}
+
+	void Box::setCorner(Vector new_corner) {
+
+		m_corner = new_corner;
 
 	}
 
-	df::Vector Box::getCorner() {
+	float Box::getHorizontal() const {
+		return m_horizontal;
+	}
 
-		return corner;
+	void Box::setHorizontal(float new_horizontal) {
+		m_horizontal = new_horizontal;
 
 	}
 
-	void Box::setCorner(df::Vector new_corner) {
+	float Box::getVertical() const {
 
-		corner = new_corner;
-
-	}
-
-	int Box::getHorizontal(){
-
-		return horizontal;
+		return m_vertical;
 
 	}
 
-	void Box::setHorizontal(int new_horizontal) {
-
-		horizontal = new_horizontal;
-
+	void Box::setVertical(float new_vertical) {
+		m_vertical = new_vertical;
 	}
-
-	int Box::getVertical(){
-
-		return vertical;
-
-	}
-
-	void Box::setVertical(int new_vertical) {
-
-		vertical = new_vertical;
-
-	}
+}

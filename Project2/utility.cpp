@@ -3,24 +3,19 @@
 #include "Object.h"
 #include "WorldManager.h"
 
-//Misc required headers
 #include "time.h"
 #include "stdio.h"
 #include "cstdlib"
 #include "sstream"
+#include <string>
 
-
-using std::stringstream;
 
 namespace df {
+
+	using std::stringstream;
 	
-	bool positionsIntersect(Vector p1, Vector p2) {
 
-		return ((p1.getX() == p2.getX()) && p1.getY() == p2.getY());
-
-	}
-
-	bool valueInRange(int value, int min, int max) {
+	bool valueInRange(float value, float min, float max) {
 
 		return (min <= value && value <= max);
 
@@ -77,25 +72,6 @@ namespace df {
 			(valueInRange(p.getY(),
 				b.getCorner().getY(), b.getCorner().getY() + b.getVertical() - 1)));
 
-	}
-
-	Vector worldToView(Vector world_pos) {
-
-		WorldManager& worldmanager = WorldManager::getInstance();
-		Vector view_origin = worldmanager.getView().getCorner();
-		int view_x = view_origin.getX();
-		int view_y = view_origin.getY();
-		Vector view_pos(world_pos.getX() - view_x, world_pos.getY() - view_y);
-		return view_pos;
-
-	}
-
-	Vector viewToWorld(Vector view_pos) {
-		Vector view_origin = WorldManager::getInstance().getView().getCorner();
-		int view_x = view_origin.getX();
-		int view_y = view_origin.getY();
-		Vector world_pos(view_pos.getX() + view_x, view_pos.getY() + view_y);
-		return world_pos;
 	}
 
 	std::string intToString(int number) {

@@ -15,6 +15,8 @@
 #include "Explosion.h"
 #include "GameOver.h"
 #include "Hero.h"
+#include "Vector.h"
+
 
 
 Hero::Hero() {
@@ -67,13 +69,13 @@ Hero::~Hero() {
 // Return 0 if ignored, else 1.
 int Hero::eventHandler(const df::Event* p_e) {
 
-    if (p_e->getType() == KEYBOARD_EVENT) {
+    if (p_e->getType() == df::KEYBOARD_EVENT) {
         const df::EventKeyboard* p_keyboard_event = dynamic_cast <const df::EventKeyboard*> (p_e);
         kbd(p_keyboard_event);
         return 1;
     }
 
-    if (p_e->getType() == df::MSE_EVENT) {
+    if (p_e->getType() == df::MOUSE) {
         const df::EventMouse* p_mouse_event = dynamic_cast <const df::EventMouse*> (p_e);
         mouse(p_mouse_event);
         return 1;
@@ -168,7 +170,7 @@ void Hero::nuke() {
 }
 
 //  Custom draw.
-int Hero::draw(){
+int Hero::draw() {
     DM.drawCh(getPosition(), HERO_CHAR, BLUE);
     return 0;
 }

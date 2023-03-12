@@ -14,7 +14,7 @@
 
 Star::Star() {
 	setType("Star");
-	setSolidness(SPECTRAL);
+	setSolidness(df::SPECTRAL);
 	setVelocity(df::Vector((float)-1.0 / (rand() % 9 + 2), 0));
 	setAltitude(0);	// Make them in the background.
 	df::Vector p((float)(rand() % (int)DM.getHorizontal()),

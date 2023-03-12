@@ -1,9 +1,3 @@
-#ifdef _MSC_VER
-
-#pragma comment (lib,"uuid.lib")
-
-#endif
-
 #include <Windows.h>
 #include "Manager.h"
 #include "DisplayManager.h"
@@ -17,77 +11,22 @@
 #include "Event.h"
 #include "EventStep.h"
 #include "WorldManager.h"
-#include "Saucer.h"
+#include "Hero.h"
+
 #include <iostream> // for std::cout
 #include <SFML/Graphics.hpp>
-#include "Hero.h"
-#include "Star.h"
 
 
-/*int main() {
+int main() {
 	void generalTesting();
-	// Load font.
-	sf::Font font;
-	if (font.loadFromFile("df-font.ttf") == false) {
-		std::cout << "Error! Unable to load font 'df-font.ttf'." << std::endl;
-		return -1;
-	}
-
-	// Setup text to display.
-	sf::Text text;
-	text.setFont(font); // Select font.
-	text.setString("Hello, world!"); // Set string to display.
-	text.setCharacterSize(32); // Set character size (in pixels).
-	text.setFillColor(sf::Color::Green); // Set text color.
-	text.setStyle(sf::Text::Bold); // Set text style.
-	text.setPosition(96, 134); // Set text position (in pixels).
-
-	// Create window to draw on.
-	sf::RenderWindow* p_window =
-		new sf::RenderWindow(sf::VideoMode(400, 300), "SFML - Hello, world!");
-	if (!p_window) {
-		std::cout << "Error! Unable to allocate RenderWindow." << std::endl;
-		return -1;
-	}
-	// Turn off mouse cursor for window.
-	p_window->setMouseCursorVisible(false);
-
-	// Synchronize refresh rate with monitor.
-	p_window->setVerticalSyncEnabled(true);
-
-	// Repeat as long as window is open.
-	while (1) {
-
-		// Clear window and draw text.
-		p_window->clear();
-		p_window->draw(text);
-		p_window->display();
-
-		// See if window has been closed.
-		sf::Event event;
-		while (p_window->pollEvent(event)) {
-			if (event.type == sf::Event::Closed) {
-				p_window->close();
-				delete p_window;
-				return 0;
-			};
-		}; // End of while (event).
-
-	}; // End of while (1).
-
 }; // End of main().
 
 //bool logManagerTests();
 //void worldManagerTests();
 void generalTesting();
 
-//int main() {
-	//generalTesting();
-	//logManagerTests();
-	//worldManagerTests();
 
-//}
-*/
+
 bool logManagerTests() {
 	df::LogManager& log_manager = df::LogManager::getInstance();
 	LM.startUp();
@@ -104,7 +43,7 @@ void worldManagerTests() {
 	df::LogManager& log_manager = df::LogManager::getInstance();
 	LM.setFlush();
 
-	new Saucer;
+
 	WM.update();
 	LM.writeLog("\nAdded new Saucer");
 	LM.writeLog("\n(o . °)");
@@ -211,44 +150,3 @@ void generalTesting() {
 
 
 }
-
-
-
-void populateWorld(void);
-
-int main(int argc, char* argv[]) {
-
-
-	if (GM.startUp()) {
-		LM.writeLog("Error starting game manager!");
-		GM.shutDown();
-		return 1;
-	}
-
-
-	LM.setFlush(true);
-
-
-	populateWorld();
-
-
-	GM.run();
-
-
-	GM.shutDown();
-
-	return 0;
-}
-
-
-// Populate world with some objects.
-void populateWorld(void) {
-
-	// Spawn some Stars.
-	for (int i = 0; i < 16; i++)
-		new Star;
-
-	// Create GameStart object.
-	new Hero();
-}
-

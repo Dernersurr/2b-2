@@ -5,12 +5,13 @@
 
 #include "Event.h"
 #include "Vector.h"
+#include <string>
 
 /*
 A specialized event that is broadcast when an object leaves the screen
 */
 namespace df {
-    const std::string MSE_EVENT = "df::mouse";
+    const std::string MOUSE= "df::mouse";
 
     enum EventMouseAction {
         UNDEFINED_MOUSE_ACTION = -1,

@@ -1,7 +1,7 @@
 #include "EventMouse.h"
 
 df::EventMouse::EventMouse() {
-	setType(MSE_EVENT);
+	setType(MOUSE);
 	mouse_action = df::EventMouseAction::UNDEFINED_MOUSE_ACTION;
 	mouse_button = df::EventMouseButton::UNDEFINED_MOUSE_BUTTON;
 	mouse_xy = Vector(-1, -1);
