@@ -130,7 +130,6 @@ int Object::setAltitude(int new_altitude) {
 		return -1;
 	}
 	WorldManager& worldmanager = WorldManager::getInstance();
-	worldmanager.getSceneGraph().updateAltitude(this, new_altitude);
 	m_altitude = new_altitude;
 
 	return 0;
@@ -149,7 +148,7 @@ void Object::setBox(Box new_box) {
 
 }
 
-Box Object::getBox() {
+Box Object::getBox() const{
 	return m_box;
 }
 }

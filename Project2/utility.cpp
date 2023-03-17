@@ -45,7 +45,7 @@ namespace df {
 
 	}
 
-	Box getWorldBox(Object* p_o) {
+	Box getWorldBox(const Object* p_o) {
 
 		Box temp_box = p_o->getBox();
 		Vector corner = temp_box.getCorner();

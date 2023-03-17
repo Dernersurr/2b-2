@@ -4,7 +4,6 @@
 #include "Manager.h"
 #include "ObjectList.h"
 #include "Box.h"
-#include "SceneGraph.h"
 #include "Object.h"
 #include "utility.h"
 
@@ -46,7 +45,6 @@ namespace df {
 
 		void draw();
 
-		SceneGraph& getSceneGraph();
 
 	};
 

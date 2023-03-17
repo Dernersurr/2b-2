@@ -6,6 +6,8 @@
 #include "Color.h"
 #include "Manager.h"
 #include "Vector.h"
+#include "Windows.h"
+#include "Object.h"
 
 namespace df {
 // Defaults for SFML window.

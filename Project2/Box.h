@@ -20,6 +20,8 @@ namespace df {
 	
 		void setCorner(Vector new_corner);
 
+	
+		Box(Vector init_corner, int init_horizontal, int init_vertical);
 
 		Vector getCorner() const;
 

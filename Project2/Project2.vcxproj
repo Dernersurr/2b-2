@@ -46,7 +46,6 @@
     <ClInclude Include="ObjectList.h" />
     <ClInclude Include="ObjectListIterator.h" />
     <ClInclude Include="Reticle.h" />
-    <ClInclude Include="SceneGraph.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Star.h" />
     <ClInclude Include="utility.h" />
@@ -78,7 +77,6 @@
     <ClCompile Include="ObjectListIterator.cpp" />
     <ClCompile Include="Reticle.cpp" />
     <ClCompile Include="Saucer.cpp" />
-    <ClCompile Include="SceneGraph.cpp" />
     <ClCompile Include="Star.cpp" />
     <ClCompile Include="utility.cpp" />
     <ClCompile Include="Vector.cpp" />

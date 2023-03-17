@@ -4,15 +4,17 @@
 //Misc required headers
 
 namespace df {
-	Box::Box(Vector init_corner, float init_horizontal, float init_vertical) {
+	Box::Box(Vector init_corner, int init_horizontal, int init_vertical) {
 
 		m_horizontal = init_horizontal;
 		m_vertical = init_vertical;
 		m_corner = init_corner;
 	}
 
-	Box::Box() {
-
+	Box::Box(void) {
+		m_horizontal = 1;
+		m_vertical = 1;
+		m_corner = Vector (0,0);
 	}
 
 	Vector Box::getCorner() const {

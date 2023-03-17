@@ -1,6 +1,5 @@
-// Hero.h
-//
-
+#ifndef __HEADER_H__
+#define __HEADER_H__
 #include "EventKeyboard.h"
 #include "EventMouse.h"
 #include "Object.h"
@@ -8,7 +7,7 @@
 
 #define HERO_CHAR '>'
 
-class Hero : public df::Object {
+class Hero:public df::Object {
 
 private:
 	Reticle* p_reticle;
@@ -28,3 +27,4 @@ public:
 	int eventHandler(const df::Event* p_e);
 	int draw();
 };
+#endif

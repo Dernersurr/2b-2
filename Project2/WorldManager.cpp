@@ -4,15 +4,12 @@
 #include "EventOut.h"
 #include "Event.h"
 #include "EventCollision.h"
-#include "SceneGraph.h"
-
 namespace df {
 
-	df::WorldManager::WorldManager(){
+	WorldManager::WorldManager() {
 		setType("WorldManager");
 		updates = ObjectList();
 		deletions = ObjectList();
-		SceneGraph scene_graph;
 	}
 	void
 		WorldManager::operator=(WorldManager const&) {
@@ -131,12 +128,6 @@ namespace df {
 			}
 			return collisionList;
 		}
-		return collisionList;
-	}
-
-	SceneGraph& WorldManager::getSceneGraph(){
-		SceneGraph scene_graph;
-			return scene_graph;
 	}
 
 

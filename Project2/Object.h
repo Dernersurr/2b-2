@@ -45,7 +45,7 @@ namespace df {
 
 		virtual int eventHandler(const Event* p_e);
 		
-		Box getBox();
+		Box getBox()const;
 		void setBox(Box new_box);
 		
 		
