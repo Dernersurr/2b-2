@@ -1,66 +1,57 @@
-#include <Windows.h>
-#include "DisplayManager.h"
-#include "LogManager.h"
+//
+// game.cpp
+// 
+
+#define VERSION 1.4
+
+// Engine includes.
 #include "GameManager.h"
-#include "WorldManager.h"
-#include "Hero.h"
-#include "Star.h"
+#include "LogManager.h"
+
+// Game includes.
 #include "Hero.h"
 #include "Saucer.h"
+#include "Star.h"
 
-#include <iostream> // for std::cout
-#include <SFML/Graphics.hpp>
-
+// Function prototypes.
+void populateWorld(void);
 
 int main(int argc, char* argv[]) {
-	void generalTesting();
-	if (GM.startUp()) {
-		LM.writeLog("Error starting game manager!");
-		GM.shutDown();
-		return 0;
-	}
-}; // End of main().
 
-//bool logManagerTests();
-//void worldManagerTests();
+    // Start up game manager.
+    if (GM.startUp()) {
+        LM.writeLog("Error starting game manager!");
+        GM.shutDown();
+        return 0;
+    }
 
+    // Write game version information to logfile.
+    LM.writeLog("Saucer Shoot Naiad, version %0.1f", VERSION);
 
+    // Set flush of logfile during development (when done, make false).
+    LM.setFlush(true);
 
-bool logManagerTests() {
-	df::LogManager& log_manager = df::LogManager::getInstance();
-	LM.startUp();
-	LM.writeLog("DM::startUp(): Current window set");
-	LM.shutDown();
-	return true;
+    // Setup some objects.
+    populateWorld();
+
+    // Run game (this blocks until game loop is over).
+    GM.run();
+
+    // Shut everything down.
+    GM.shutDown();
 }
 
-void worldManagerTests() {
-	df::GameManager& game_manager = df::GameManager::getInstance();
-	GM.startUp();
-	df::WorldManager& world_manager = df::WorldManager::getInstance();
-	WM.startUp();
-	df::LogManager& log_manager = df::LogManager::getInstance();
-	LM.setFlush();
+// Populate world with some objects.
+void populateWorld(void) {
 
+    // Spawn some Stars.
+    for (int i = 0; i < 16; i++)
+        new Star;
 
-	WM.update();
-	LM.writeLog("\nAdded new Saucer");
-	LM.writeLog("\n(o . °)");
-	LM.shutDown();
-	WM.shutDown();
-	GM.shutDown();
-}
+    // Create hero.
+    new Hero;
 
-
-void generalTesting(void) {
-	GM.startUp();
-	GM.run();
-	WM.startUp();
-	WM.getInstance();
-	DM.getInstance().drawString(df::Vector(512, 384), "Hello World", df::Justification::CENTER_JUSTIFIED, WHITE);
-	new Star;
-	new Hero;
-	DM.getInstance().drawCh(df::Vector(30, 30), 'L', GREEN);
-	WM.update();
-	WM.moveObject(new Star, df::Vector(0, 0));
+    // Spawn some saucers to shoot.
+    for (int i = 0; i < 16; i++)
+        new Saucer;
 }
