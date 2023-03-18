@@ -6,7 +6,10 @@
 #include "WorldManager.h"
 #include "EventStep.h"
 #include "Event.h"
+#include "DisplayManager.h"
 #include "Manager.h"
+#include "Hero.h"
+
 
 namespace df {
 	GameManager::GameManager() {
@@ -27,8 +30,9 @@ namespace df {
 		LogManager& log_manager = LogManager::getInstance();
 		log_manager.startUp();
 		WorldManager& world_manager = WorldManager::getInstance();
+		DM.startUp();
+		DM.drawCh(df::Vector(40, 12), HERO_CHAR, RED);
 		world_manager.startUp();
-
 		Manager::startUp();
 
 

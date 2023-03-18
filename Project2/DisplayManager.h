@@ -17,7 +17,7 @@ const int WINDOW_HORIZONTAL_CHARS_DEFAULT = 80;
 const int WINDOW_VERTICAL_CHARS_DEFAULT = 24;
 const int WINDOW_STYLE_DEFAULT = sf::Style::Titlebar;
 const sf::Color WINDOW_BACKGROUND_COLOR_DEFAULT = sf::Color::Black;
-const std::string WINDOW_TITLE_DEFAULT = "Dragonfly";
+const std::string WINDOW_TITLE_DEFAULT = "Grungo Bungo";
 const std::string FONT_FILE_DEFAULT = "df-font.ttf";
 const std::string TEXT_OPAQUE_DEFAULT = "default";
 enum Justification {

@@ -9,7 +9,7 @@
 
  namespace df {
 
-	 const std::string LOGFILE_NAME = "dragonfly.log.txt";
+	 const std::string LOGFILE_NAME = "dragonfly-log.txt";
 
 #define LM df :: LogManager :: getInstance ()
 

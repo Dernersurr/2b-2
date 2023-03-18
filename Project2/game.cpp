@@ -26,6 +26,7 @@ int main(int argc, char* argv[]) {
     }
 
     // Write game version information to logfile.
+    LM.writeLog("Meewee Hee Hee");
     LM.writeLog("Saucer Shoot Naiad, version %0.1f", VERSION);
 
     // Set flush of logfile during development (when done, make false).
