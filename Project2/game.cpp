@@ -14,9 +14,23 @@
 #include "Star.h"
 
 // Function prototypes.
-void populateWorld(void);
+//void populateWorld(void);
+int main() {
+    LM.startUp();
+    LM.writeLog("( _ -_-)_","\n");
+    LM.setFlush(true);
+    DM.startUp();
+    DM.drawCh(df::Vector(10, 5), '*', BLACK);
+    DM.swapBuffers();
+   // Sleep(2);  // Use Sleep(2000) in Windows.
+    
+    DM.shutDown();
+    LM.shutDown();
+}
 
-int main(int argc, char* argv[]) {
+/*int main(int argc, char* argv[]) {
+
+ 
 
     // Start up game manager.
     if (GM.startUp()) {
@@ -56,3 +70,4 @@ void populateWorld(void) {
     for (int i = 0; i < 16; i++)
         new Saucer;
 }
+*/

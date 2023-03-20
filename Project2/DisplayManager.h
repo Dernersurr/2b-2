@@ -1,7 +1,7 @@
 ﻿# pragma once
 #ifndef __DISPLAY_MANAGER_H__
 #define __DISPLAY_MANAGER_H__
-#include <SFML/Graphics.hpp>
+#include <SFML\Graphics.hpp>
 #include<string>
 #include "Color.h"
 #include "Manager.h"

@@ -7,7 +7,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerWorkingDirectory>.\x64\Debug</LocalDebuggerWorkingDirectory>
-    <LocalDebuggerEnvironment>"C:\Users\User\Documents\Visual Studio 2022\Projects\SFML-2.5\bin"</LocalDebuggerEnvironment>
+    <LocalDebuggerEnvironment>C:\Users\User\source\repos\SFML-2.5\bin</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -16,8 +16,8 @@
     <LocalDebuggerWorkingDirectory>.\x64\Debug</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerEnvironment>"C:\Users\User\Documents\Visual Studio 2022\Projects\SFML-2.5\bin"</LocalDebuggerEnvironment>
+    <LocalDebuggerEnvironment>C:\Users\User\source\repos\SFML-2.5\bin</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerWorkingDirectory>.\x64\Debug</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerWorkingDirectory>.\x64\Release</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
 </Project>

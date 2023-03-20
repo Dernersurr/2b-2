@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Clock.h" />
@@ -144,8 +145,8 @@
     </LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\User\Documents\Visual Studio 2022\Projects\SFML-2.5\include;C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include;C:\Program Files (x86)\Windows Kits\10\Include;$(VC_IncludePath_x86);$(WindowsSDK_IncludePath_x86)</IncludePath>
-    <LibraryPath>C:\Users\User\Documents\Visual Studio 2022\Projects\SFML-2.5\lib;$(WindowsSDK_LibraryPath_x64);$(VC_LibraryPath_x64)</LibraryPath>
+    <IncludePath>C:\Users\User\source\repos\SFML-2.5\include;C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include;C:\Program Files (x86)\Windows Kits\10\Include;$(VC_IncludePath_x86);$(WindowsSDK_IncludePath_x86)</IncludePath>
+    <LibraryPath>C:\Users\User\source\repos\SFML-2.5\lib;$(WindowsSDK_LibraryPath_x64);$(VC_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>C:\Users\User\Documents\Visual Studio 2022\Projects\SFML-2.5\include</IncludePath>
@@ -193,7 +194,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-window-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-system-d.lib</AdditionalDependencies>
+      <AdditionalDependencies>sfml-window-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-system-d.lib;Winmm.lib;Ws2_32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Program Files (x86)\Microsoft SDKs\Windows Kits;C:\Users\User\source\repos\SFML-2.5\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

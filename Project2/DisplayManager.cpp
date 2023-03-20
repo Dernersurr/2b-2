@@ -31,15 +31,48 @@ namespace df {
         static DisplayManager display_manager;
         return display_manager;
     }
+    int DisplayManager::startUp() {
+        // I f window a l r e a d y c r e a t e d , do n o t h i n g .
+        int pwindow;
+        int pfont;
+        if (p_window != NULL) {
+            return -1;
+        }
+        else {
+            pwindow = 0;
+        }
+        sf::VideoMode video_mode = sf::VideoMode(window_horizontal_pixels, window_vertical_pixels);
+        p_window = new sf::RenderWindow(video_mode, window_title, window_style);
+            p_window->setMouseCursorVisible(false);
+            p_window->setVerticalSyncEnabled(true);
 
-   int DisplayManager::startUp() {
+            font = new sf::Font();
+            font->loadFromFile(font_file);
+            if (!font->loadFromFile(font_file)) {
+                df::LogManager::getInstance().writeLog("DisplayManager: Failed to load font \"%s\"\n", font_file.c_str());
+                return -1;
+            }
+            else {
+                pfont = 0;
+            }
+            if ((pfont == 0) && (pwindow == 0)) {
+                Manager::startUp();
+                df::LogManager::getInstance().writeLog("DisplayManager: Display manager succesfully started\n");
+
+                return 0;
+            }
+            else {
+            return -1;
+        }
+    }
+   /*int DisplayManager::startUp() {
 
         if (p_window != NULL) {
             return 0;
         };
 
-        sf::VideoMode video_mode = sf::VideoMode(window_horizontal_pixels, window_vertical_pixels);
-        p_window = new sf::RenderWindow(video_mode, window_title, window_style);
+        //sf::VideoMode video_mode = sf::VideoMode(window_horizontal_pixels, window_vertical_pixels);
+        //p_window = new sf::RenderWindow(video_mode, window_title, window_style);
         if (p_window == nullptr) {
             df::LogManager::getInstance().writeLog("DisplayManager: Failed to make SFML window\n");
             return -1;
@@ -57,7 +90,7 @@ namespace df {
         df::LogManager::getInstance().writeLog("DisplayManager: Display manager succesfully started\n");
         return 0;
     }
-    
+    */
     void DisplayManager::shutDown() {
         p_window->close();
         delete p_window;
