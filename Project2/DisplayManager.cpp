@@ -24,7 +24,7 @@ namespace df {
     }
 
     DisplayManager::~DisplayManager() {
-        if (p_window != nullptr) delete p_window;
+        //if (p_window != nullptr) delete p_window;
     }
 
     DisplayManager& DisplayManager::getInstance() {
@@ -116,7 +116,7 @@ namespace df {
 
     int DisplayManager::swapBuffers() {
 
-        if (p_window = NULL) {
+        if (p_window == NULL) {
             return -1;
         }
         // Display current window.

@@ -14,25 +14,22 @@
 #include "Star.h"
 
 // Function prototypes.
-//void populateWorld(void);
+void populateWorld(void);
 int main() {
     LM.startUp();
     LM.writeLog("( _ -_-)_","\n");
     LM.setFlush(true);
     DM.startUp();
-    DM.drawCh(df::Vector(10, 5), '*', BLACK);
+    DM.drawCh(df::Vector(10, 5), '*', WHITE);
     DM.swapBuffers();
-   // Sleep(2);  // Use Sleep(2000) in Windows.
-    
+    populateWorld();
+    Sleep(2000);  // Use Sleep(2000) in Windows.
     DM.shutDown();
     LM.shutDown();
 }
 
 /*int main(int argc, char* argv[]) {
-
- 
-
-    // Start up game manager.
+   // Start up game manager.
     if (GM.startUp()) {
         LM.writeLog("Error starting game manager!");
         GM.shutDown();
@@ -54,7 +51,7 @@ int main() {
 
     // Shut everything down.
     GM.shutDown();
-}
+}*/
 
 // Populate world with some objects.
 void populateWorld(void) {
@@ -70,4 +67,3 @@ void populateWorld(void) {
     for (int i = 0; i < 16; i++)
         new Saucer;
 }
-*/
