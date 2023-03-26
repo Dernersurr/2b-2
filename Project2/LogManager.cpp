@@ -40,7 +40,7 @@ namespace df {
 		errno_t err = fopen_s(&m_p_f, cstr, "w");
 
 		
-		if (m_p_f == NULL) {
+		if (err == 0) {
 			is_open = true;
 			return 1;
 		}
@@ -53,7 +53,7 @@ namespace df {
 		Manager::shutDown();
 
 		// Close logfile
-		fclose(m_p_f);
+		//fclose(m_p_f);
 		is_open = false;
 	}
 
@@ -66,7 +66,7 @@ namespace df {
 
 		va_list args;
 		va_start(args, fmt);
-		chars_written = vfprintf(m_p_f, fmt, args);
+		chars_written = printf(fmt, args);
 		va_end(args);
 
 		printf("\n", m_p_f);

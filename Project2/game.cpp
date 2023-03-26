@@ -7,6 +7,8 @@
 // Engine includes.
 #include "GameManager.h"
 #include "LogManager.h"
+#include "DisplayManager.h"
+#include "WorldManager.h"
 
 // Game includes.
 #include "Hero.h"
@@ -19,13 +21,18 @@ int main() {
     LM.startUp();
     LM.writeLog("( _ -_-)_","\n");
     LM.setFlush(true);
+    WM.startUp();
+    GM.startUp();
+    WM.getInstance();
     DM.startUp();
-    DM.drawCh(df::Vector(10, 5), '*', WHITE);
-    DM.swapBuffers();
     populateWorld();
-    Sleep(2000);  // Use Sleep(2000) in Windows.
+    DM.drawCh(df::Vector(10, 5), '*', WHITE);
+    WM.draw();
+    DM.swapBuffers();
+    Sleep(5000);  // Use Sleep(2000) in Windows.
     DM.shutDown();
     LM.shutDown();
+
 }
 
 /*int main(int argc, char* argv[]) {
@@ -57,9 +64,10 @@ int main() {
 void populateWorld(void) {
 
     // Spawn some Stars.
-    for (int i = 0; i < 16; i++)
-        new Star;
-
+    for (int i = 0; i < 16; i++) {
+        Star* s = new Star;
+        s->draw();
+    }
     // Create hero.
     new Hero;
 
