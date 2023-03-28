@@ -59,6 +59,6 @@ void GameOver::step() {
 }
 
 int GameOver::draw() {
-    DM.drawString(getPosition(), "Game Over!", df::CENTER_JUSTIFIED, WHITE);
+    DM.drawString(getPosition(), "Game Over!", df::CENTER_JUSTIFIED, sf::Color::White);
     return 0;
 }

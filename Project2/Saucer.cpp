@@ -139,6 +139,6 @@ void Saucer::moveToStart() {
 }
 
 int Saucer::draw() {
-    DM.drawCh(getPosition(), SAUCER_CHAR, GREEN);
+    DM.drawCh(getPosition(), SAUCER_CHAR, sf::Color::Green);
     return 0;
 }

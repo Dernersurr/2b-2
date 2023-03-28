@@ -16,31 +16,34 @@
 #include "Star.h"
 
 // Function prototypes.
-//void populateWorld(void);
+void populateWorld(void);
 int main() {
     LM.startUp();
     LM.writeLog("( _ -_-)_","\n");
-    LM.setFlush(true);
-<<<<<<< HEAD
-    //WM.startUp();
-    //GM.startUp();
-    //WM.getInstance();
-    //DM.startUp();
-    //populateWorld();
-    //DM.drawCh(df::Vector(10, 5), '*', WHITE);
+   
+
+    WM.startUp();
+    GM.startUp();
+    WM.getInstance();
+    DM.startUp();
+    DM.clear();
+
+    
+    populateWorld();
+    DM.drawCh(df::Vector(10, 5), 'B', sf::Color::White);
+    
+    //DM.drawString(df::Vector(10, 3), "Hello World", df::Justification::CENTER_JUSTIFIED, sf::Color::Black);
     //WM.draw();
     //DM.swapBuffers();
-    Sleep(2000);  // Use Sleep(2000) in Windows.
-    //DM.shutDown();
-=======
-    DM.startUp();
-    DM.drawCh(df::Vector(10, 5), '*', BLACK);
-    DM.swapBuffers();
-   // Sleep(2);  // Use Sleep(2000) in Windows.
-    
+
+    //DM.drawCh(df::Vector(10, 6), '*', sf::Color::Black);
+    //DM.swapBuffers();
+    DM.display();
+    Sleep(5000);  // Use Sleep(2000) in Windows.
+    LM.setFlush(true);
     DM.shutDown();
->>>>>>> parent of ce413f0 (DisplayManager Needs to work)
-    LM.shutDown();
+//parent of ce413f0 (DisplayManager Needs to work)
+    //LM.shutDown();
 
 }
 
@@ -71,7 +74,7 @@ int main() {
     // Shut everything down.
     GM.shutDown();
 }
-
+*/
 // Populate world with some objects.
 void populateWorld(void) {
 
@@ -81,10 +84,10 @@ void populateWorld(void) {
         s->draw();
     }
     // Create hero.
-    new Hero;
+    Hero* h = new Hero;
+    h->draw();
 
     // Spawn some saucers to shoot.
     for (int i = 0; i < 16; i++)
         new Saucer;
 }
-*/

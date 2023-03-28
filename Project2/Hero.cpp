@@ -171,6 +171,6 @@ void Hero::nuke() {
 
 //  Custom draw.
 int Hero::draw() {
-    DM.drawCh(getPosition(), HERO_CHAR, BLUE);
+    DM.drawCh(getPosition(), HERO_CHAR, sf::Color::Blue);
     return 0;
 }

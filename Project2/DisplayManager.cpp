@@ -24,7 +24,6 @@ namespace df {
     }
 
     DisplayManager::~DisplayManager() {
-        if (p_window != nullptr) delete p_window;
     }
 
     DisplayManager& DisplayManager::getInstance() {
@@ -102,7 +101,7 @@ namespace df {
     // Return 0 if ok, else -1.
    // Draw a character at window location(x,y) with color.
         // Return 0 if ok, else −1.
-    int DisplayManager::drawCh(Vector world_pos, char ch, Color color) const{
+    int DisplayManager::drawCh(Vector world_pos, char ch, sf::Color color) const{
             if (p_window == nullptr || font == nullptr) {
                 df::LogManager::getInstance().writeLog(
                     "DisplayManager: Failed to drawCh(pos(%f, %f), %c): null window? %s, null font? %s\n",
@@ -113,24 +112,39 @@ namespace df {
                 return -1;
             }
             else {
+                sf::Text text;
+                text.setString(ch);
+                text.setFillColor(color);
+                text.setPosition(world_pos.getX(),world_pos.getY());
+                p_window->draw(text);
+                LM.writeLog("Successfully drew a thing");
                 return 0;
             }
     };
 
     int DisplayManager::swapBuffers() {
 
-        if (p_window = NULL) {
+        if (p_window == NULL) {
             return -1;
         }
         // Display current window.
         p_window->display();
         // Clear window to get ready for next draw.
-        p_window->clear();
+        p_window->clear(sf::Color::Green);
 
         return 0; // Success.
     }
 
-    int DisplayManager::drawString(Vector world_pos, std::string str, Justification just, Color color) const {
+    int DisplayManager::clear() {
+        p_window->clear(sf::Color::Green);
+        return 0;
+    }
+    int DisplayManager::display() {
+        p_window->display();
+        return 0;
+    }
+
+    int DisplayManager::drawString(Vector world_pos, std::string str, Justification just, sf::Color color) const {
 
         Vector starting_pos = world_pos;
 

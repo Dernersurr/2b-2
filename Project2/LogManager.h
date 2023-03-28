@@ -5,7 +5,7 @@
  #include <stdio.h>
 
  #include "Manager.h"
-#include "C:\Users\User\Documents\GitHub\2b-2\dragonfly-log.txt"
+//#include "C:\Users\User\Documents\GitHub\2b-2\dragonfly-log.txt"
 
  namespace df {
 

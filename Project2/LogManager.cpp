@@ -18,9 +18,7 @@ namespace df {
 	}
 
 	LogManager::~LogManager() {
-		if (is_open) {
-			fclose(m_p_f);
-		}
+		
 	}
 
 	void LogManager::operator=(LogManager const&) {
@@ -54,8 +52,10 @@ namespace df {
 		Manager::shutDown();
 
 		// Close logfile
-		fclose(m_p_f);
-		is_open = false;
+		if (is_open == true && m_p_f != NULL) {
+			fclose(m_p_f);
+			is_open = false;
+		}
 	}
 
 	void LogManager::setFlush(bool m_do_flush) {

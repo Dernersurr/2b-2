@@ -48,17 +48,17 @@ void Explosion::step() {
 }
 
 int Explosion::draw() {
-    DM.drawCh(getPosition(), '*', RED);
+    DM.drawCh(getPosition(), '*', sf::Color::Red);
 
     if (time_to_live < 4) {
         df::Vector p1(getPosition().getX() - 1, getPosition().getY() - 1);
         df::Vector p2(getPosition().getX() + 1, getPosition().getY() - 1);
         df::Vector p3(getPosition().getX() - 1, getPosition().getY() + 1);
         df::Vector p4(getPosition().getX() + 1, getPosition().getY() + 1);
-        DM.drawCh(p1, '\\', RED);
-        DM.drawCh(p2, '/', RED);
-        DM.drawCh(p3, '/', RED);
-        DM.drawCh(p4, '\\', RED);
+        DM.drawCh(p1, '\\', sf::Color::Red);
+        DM.drawCh(p2, '/', sf::Color::Red);
+        DM.drawCh(p3, '/', sf::Color::Red);
+        DM.drawCh(p4, '\\', sf::Color::Red);
     }
 
     return 0;

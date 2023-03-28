@@ -59,7 +59,7 @@ enum Justification {
 
 		// Draw a character at screen location (x,y) with color.
 		// Return 0 if ok, else -1.
-		int drawCh(Vector world_pos, char ch, Color color) const;
+		int drawCh(Vector world_pos, char ch, sf::Color color) const;
 
 		// Return window's horizontal maximum (in characters).
 		int getHorizontal() const;
@@ -76,11 +76,15 @@ enum Justification {
 		// Render current display buffer.
 		// Return 0 if ok, else -1.
 		int swapBuffers();
+		int clear();
+
+		int display();
+
 
 		// Return pointer to SFML drawing window.
 		sf::RenderWindow* getWindow() const;
 
-		int drawString(Vector world_pos, std::string str, Justification just, Color color) const;
+		int drawString(Vector world_pos, std::string str, Justification just, sf::Color color) const;
 
 		//Helper Methods
 		float charHeight() const;

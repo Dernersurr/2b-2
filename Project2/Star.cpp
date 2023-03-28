@@ -23,7 +23,7 @@ Star::Star() {
 }
 
 int Star::draw() {
-	DM.drawCh(getPosition(), STAR_CHAR, WHITE);
+	DM.drawCh(getPosition(), STAR_CHAR, sf::Color::White);
 	return 0;
 }
 

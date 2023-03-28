@@ -31,7 +31,7 @@ namespace df {
 		log_manager.startUp();
 		WorldManager& world_manager = WorldManager::getInstance();
 		DM.startUp();
-		DM.drawCh(df::Vector(40, 12), HERO_CHAR, RED);
+		DM.drawCh(df::Vector(40, 12), HERO_CHAR, sf::Color::Red);
 		world_manager.startUp();
 		Manager::startUp();
 
