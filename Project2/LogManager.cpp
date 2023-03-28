@@ -33,6 +33,7 @@ namespace df {
 	}
 
 	int LogManager::startUp() {
+		
 		Manager::startUp();
 
 		const char* cstr = LOGFILE_NAME.c_str();
@@ -53,7 +54,7 @@ namespace df {
 		Manager::shutDown();
 
 		// Close logfile
-		//fclose(m_p_f);
+		fclose(m_p_f);
 		is_open = false;
 	}
 

@@ -1,2 +1,6 @@
-﻿  game.cpp
+﻿  LogManager.cpp
+C:\Users\User\Documents\GitHub\2b-2\Project2\LogManager.cpp(73,16): warning C4474: 'printf' : too many arguments passed for format string
+C:\Users\User\Documents\GitHub\2b-2\Project2\LogManager.cpp(73,16): message : placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+  game.cpp
+  Generating Code...
   Project2.vcxproj -> C:\Users\User\Documents\GitHub\2b-2\x64\Debug\Project2.exe

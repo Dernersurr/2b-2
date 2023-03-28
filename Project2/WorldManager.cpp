@@ -128,6 +128,7 @@ namespace df {
 			}
 			return collisionList;
 		}
+		return collisionList;
 	}
 
 
