@@ -115,6 +115,7 @@ namespace df {
                 sf::Text text;
                 text.setString(ch);
                 text.setFillColor(color);
+                text.setFont(*font);
                 text.setPosition(world_pos.getX(),world_pos.getY());
                 p_window->draw(text);
                 LM.writeLog("Successfully drew a thing");
@@ -130,13 +131,13 @@ namespace df {
         // Display current window.
         p_window->display();
         // Clear window to get ready for next draw.
-        p_window->clear(sf::Color::Green);
+        p_window->clear();
 
         return 0; // Success.
     }
 
     int DisplayManager::clear() {
-        p_window->clear(sf::Color::Green);
+        p_window->clear();
         return 0;
     }
     int DisplayManager::display() {

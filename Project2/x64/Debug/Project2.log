@@ -1,2 +1,18 @@
-﻿  game.cpp
+﻿  Bullet.cpp
+  DisplayManager.cpp
+  Explosion.cpp
+  GameManager.cpp
+  GameOver.cpp
+  Hero.cpp
+  InputManager.cpp
+C:\Users\User\Documents\GitHub\2b-2\Project2\InputManager.cpp(59,77): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Documents\GitHub\2b-2\Project2\InputManager.cpp(59,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  LogManager.cpp
+C:\Users\User\Documents\GitHub\2b-2\Project2\LogManager.cpp(73,16): warning C4474: 'printf' : too many arguments passed for format string
+C:\Users\User\Documents\GitHub\2b-2\Project2\LogManager.cpp(73,16): message : placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+  Saucer.cpp
+  Star.cpp
+  WorldManager.cpp
+  game.cpp
+  Generating Code...
   Project2.vcxproj -> C:\Users\User\Documents\GitHub\2b-2\x64\Debug\Project2.exe
