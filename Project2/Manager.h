@@ -38,4 +38,5 @@ namespace df {
 
 	
 }
+//class Manager
 #endif 

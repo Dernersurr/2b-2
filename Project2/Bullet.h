@@ -5,7 +5,7 @@
 #include "EventCollision.h"
 #include "Object.h"
 
-#define BULLET_CHAR '-'
+#define BULLET_CHAR '='
 
 class Bullet : public df::Object {
 

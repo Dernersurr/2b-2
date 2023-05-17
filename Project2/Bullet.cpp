@@ -33,7 +33,7 @@ int Bullet::eventHandler(const df::Event* p_e) {
         return 1;
     }
 
-    if (p_e->getType() == df::COLLISION_EVENT) {
+    if (p_e->getType() == COLLISION_EVENT) {
         const df::EventCollision* p_collision_event = dynamic_cast <const df::EventCollision*> (p_e);
         hit(p_collision_event);
         return 1;
@@ -55,6 +55,7 @@ void Bullet::hit(const df::EventCollision* p_c) {
 }
 
 int Bullet::draw() {
-    DM.drawCh(getPosition(), BULLET_CHAR, sf::Color::Blue);
+    DM.drawCh(getPosition(), BULLET_CHAR, sf::Color::Red);
+    printf("Bullet drawn");
     return 0;
 }

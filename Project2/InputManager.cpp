@@ -4,10 +4,14 @@
 #include "LogManager.h"
 #include "EventKeyboard.h"
 #include "EventMouse.h"
+#include <iostream>
+#include <Windows.h>
 
 namespace df {
    InputManager::InputManager() {
         setType("InputManager");
+        startUp();
+        p_window -> setKeyRepeatEnabled(true);
     }
 
    InputManager& InputManager::getInstance() {
@@ -22,10 +26,10 @@ namespace df {
             return -1;
         }
 
-        p_window = DisplayManager::getInstance().getWindow();
-        p_window->setKeyRepeatEnabled(false);
+        p_window = DM.getWindow();
+        p_window->setKeyRepeatEnabled(true);
         Manager::startUp();
-        LogManager::getInstance().writeLog("IInputManager: nput manager succesfully started\n");
+        LogManager::getInstance().writeLog("InputManager: Input manager succesfully started\n");
         return 0;
     }
 
@@ -37,7 +41,7 @@ namespace df {
     Keyboard::Key sfmlKeyToDfKey(sf::Keyboard::Key);
     void InputManager::getInput() {
         sf::Event event;
-
+        //p_window = nullptr;
         while (p_window->pollEvent(event)) {
             if (event.type == sf::Event::KeyPressed) {
                 EventKeyboard e;
@@ -45,43 +49,71 @@ namespace df {
                 e.setKey(sfmlKeyToDfKey(event.key.code));
                 onEvent(&e);
             }
-
-            if (event.type == sf::Event::KeyReleased) {
+            else if (event.type == sf::Event::KeyReleased) {
                 EventKeyboard e;
                 e.setKeyboardAction(EventKeyboardAction::KEY_RELEASED);
                 e.setKey(sfmlKeyToDfKey(event.key.code));
                 onEvent(&e);
             }
-
-            if (event.type == sf::Event::MouseMoved) {
+            else if (event.type == sf::Event::MouseMoved) {
+                std::cout << "mouse event: " << event.type << std::endl;
                 EventMouse e;
                 e.setMouseAction(EventMouseAction::MOVED);
-                e.setMousePosition(Vector(event.mouseMove.x, event.mouseMove.y));
+                sf::Vector2i pos = sf::Mouse::getPosition(*p_window);
+                float x = pos.x;
+                float y = pos.y;
+                printf("Mouse Coords: %f %f\n", x, y);
+                std::cout << "Mouse Coords: " << event.mouseMove.x << " " << event.mouseMove.y << std::endl;
+                //printf("Mouse Coords: %i %i\n", event.mouseMove.x, event.mouseMove.y);
+                Vector posOther(x, y);
+                e.setMousePosition(posOther);
+                //e.setMousePosition(Vector(event.mouseMove.x, event.mouseMove.y));
                 onEvent(&e);
             }
-        }
+            else if (event.type == sf::Event::MouseButtonPressed) {
+                std::cout << "mouse event: " << event.type << std::endl;
+                EventMouse e;
+                e.setMouseAction(EventMouseAction::CLICKED);
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    e.setMouseAction(EventMouseAction::PRESSED);
+                    e.setMouseButton(EventMouseButton::LEFT);
+                }
 
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
-            EventMouse e;
-            e.setMouseAction(EventMouseAction::PRESSED);
-            e.setMouseButton(EventMouseButton::LEFT);
-            onEvent(&e);
-        }
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right)) {
-            EventMouse e;
-            e.setMouseAction(EventMouseAction::PRESSED);
-            e.setMouseButton(EventMouseButton::RIGHT);
-            onEvent(&e);
-        }
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Middle)) {
-            EventMouse e;
-            e.setMouseAction(EventMouseAction::PRESSED);
-            e.setMouseButton(EventMouseButton::MIDDLE);
-            onEvent(&e);
+                sf::Vector2i pos = sf::Mouse::getPosition(*p_window);
+                float x = pos.x;
+                float y = pos.y;
+                printf("Mouse Coords: %f %f\n", x, y);
+                std::cout << "Mouse Coords: " << event.mouseMove.x << " " << event.mouseMove.y << std::endl;
+                //e.setMousePosition(Vector(event.mouseMove.x, event.mouseMove.y));
+                onEvent(&e);
+            }
+            //}
+
+            /*if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
+                std::cout << "mouse event: " << event.type << std::endl;
+                EventMouse e;
+                e.setMouseAction(EventMouseAction::PRESSED);
+                e.setMouseButton(EventMouseButton::LEFT);
+                onEvent(&e);
+            }
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right)) {
+                std::cout << "mouse event: " << event.type << std::endl;
+                EventMouse e;
+                e.setMouseAction(EventMouseAction::PRESSED);
+                e.setMouseButton(EventMouseButton::RIGHT);
+                onEvent(&e);
+            }
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Middle)) {
+                std::cout << "mouse event: " << event.type << std::endl;
+                EventMouse e;
+                e.setMouseAction(EventMouseAction::PRESSED);
+                e.setMouseButton(EventMouseButton::MIDDLE);
+                onEvent(&e);
+            }
+        }*/
         }
     }
-
-    //Monster switch to convert between SFML and DF key types
+        //Monster switch to convert between SFML and DF key types
     Keyboard::Key sfmlKeyToDfKey(sf::Keyboard::Key e) {
         switch (e) {
         case sf::Keyboard::Key::Space:
@@ -222,4 +254,5 @@ namespace df {
             return Keyboard::Key::UNDEFINED_KEY;
         }
     }
+
 };

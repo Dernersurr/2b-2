@@ -5,6 +5,8 @@
 #include "Vector.h"
 #include "DisplayManager.h"
 #include "utility.h"
+#include "Event.h"
+#include "EventStep.h"
 
 namespace df {
 	Object::Object() {

@@ -4,6 +4,10 @@
 #include "EventOut.h"
 #include "Event.h"
 #include "EventCollision.h"
+#include "EventStep.h"
+#include "Object.h"
+#include "Hero.h"
+#include <iostream>
 namespace df {
 
 	WorldManager::WorldManager() {
@@ -41,7 +45,9 @@ namespace df {
 	}
 	int WorldManager::removeObject(Object* p_o) {
 		updates.remove(p_o);
+		markForDelete(p_o);
 		LogManager& log_manager = LogManager::getInstance();
+		printf("Object removed from WorldManager");
 		log_manager.writeLog("Object removed from WorldManager");
 		return 0;
 	}
@@ -61,11 +67,22 @@ namespace df {
 		return list;
 	}
 
-	void WorldManager::update() {
-		ObjectListIterator iterator(&deletions);
-		while (!iterator.isDone()) {
-			delete iterator.currentObject();
-			iterator.next();
+	void df::WorldManager::update() {
+		//Set velocites
+		ObjectListIterator updates_list_iter(&updates);
+		for (updates_list_iter.first(); !updates_list_iter.isDone(); updates_list_iter.next()) {
+			auto p_o = updates_list_iter.currentObject();
+			Vector new_pos = p_o->predictPosition();
+
+			if (new_pos.getX() != p_o->getPosition().getX() ||
+				new_pos.getY() != p_o->getPosition().getY()) {
+				moveObject(p_o, new_pos);
+			}
+		}
+	    ObjectListIterator del_list_iter(&deletions);
+		for (del_list_iter.first(); !del_list_iter.isDone(); del_list_iter.next()) {
+			delete del_list_iter.currentObject();
+			printf("DDDDDDDDDDDDDDDDDDDDDD deleted object\n");
 		}
 		deletions.clear();
 	}
@@ -74,11 +91,12 @@ namespace df {
 		ObjectListIterator iterator(&deletions);
 		while (!iterator.isDone()) {
 			if (iterator.currentObject() == p_o) {
-				return 0;
+				deletions.insert(p_o);
+				printf("object inserted to deletions\n");
+				return 1;
 			}
 			iterator.next();
 		}
-		deletions.insert(p_o);
 		return 0;
 	}
 	void df::WorldManager::draw() {
@@ -93,14 +111,18 @@ namespace df {
 		}
 	}
 	bool positionsIntersect(Vector p1, Vector p2) {
-		if (p1.getX() == p2.getX() && p1.getY() == p2.getY()) {
+		if (p1.getX() == (p2.getX() + 5) && p1.getY() == (p2.getY() + 10) ||
+			(p1.getX() == (p2.getX() + 5) && p1.getY() == (p2.getY() - 10) ||
+			(p1.getX() == (p2.getX() - 5) && p1.getY() == (p2.getY() + 10) ||
+				(p1.getX() == (p2.getX() - 5) && p1.getY() == (p2.getY() - 10))))) {
 			return true;
 		}
 		else {
+//			printf("Vector of p1 is: ");
 			return false;
 		}
 	}
-	ObjectList df::WorldManager::isCollision(Object* p_o, Vector where) {
+	ObjectList WorldManager::isCollision(Object* p_o, Vector where) {
 		ObjectList collisionList;
 		ObjectListIterator updates_list_iter(&updates);
 		for (updates_list_iter.first(); !updates_list_iter.isDone(); updates_list_iter.next()) {
@@ -121,7 +143,7 @@ namespace df {
 		for (updates_list_iter.first(); !updates_list_iter.isDone(); updates_list_iter.next()) {
 			Object* p_temp_o = updates_list_iter.currentObject();
 			if (p_temp_o != p_o) {
-				if (positionsIntersect(p_temp_o->getPosition(), where) && positionsIntersect(p_o->getPosition(),where)) {
+				if (positionsIntersect(p_temp_o->getPosition(), where) && positionsIntersect(p_o->getPosition(), where)) {
 					getWorldBox(p_temp_o);
 					collisionList.insert(p_temp_o);
 				}
@@ -132,44 +154,47 @@ namespace df {
 	}
 
 
-	int WorldManager::moveObject(Object* p_o, Vector where) {
-
-		bool doMove = true;
-
+	int df::WorldManager::moveObject(Object* p_o, Vector where) {
+		//printf("move function called------------------\n");
 		if (p_o->isSolid()) {
-			ObjectList collisions = isCollision(p_o, where);
-			if (!collisions.isEmpty()) {
-				ObjectListIterator i(&collisions);
-				while (!i.isDone()) {
-					Object* p_temp_o = i.currentObject();
+
+			ObjectList collisionsList = isCollision(p_o, where);
+			//std::cout<<"Move Object Collision size: " << collisionsList.getCount()<<">>>>>>>>>>>>>>>>>>>>>" << std::endl;
+			if (collisionsList.getCount() != 0) {
+				bool will_move = true;
+
+				ObjectListIterator coll_iter(&collisionsList);
+				for (coll_iter.first(); !coll_iter.isDone(); coll_iter.next()) {
+					auto p_temp_o = coll_iter.currentObject();
 
 					EventCollision c(p_o, p_temp_o, where);
 					p_o->eventHandler(&c);
 					p_temp_o->eventHandler(&c);
 
-					if (p_temp_o->getSolidness() == HARD &&
-						p_o->getSolidness() == HARD) {
-						doMove = false; //Collision with hard solid
+					if (p_o->getSolidness() == Solidness::HARD && p_temp_o->getSolidness() == Solidness::HARD) {
+						will_move = false;
+						//printf("Will Move is false\n");
 					}
-					i.next();
-				}//End iterate
-
-				if (!doMove) {
-					return -1; //Can not move
 				}
+				if (!will_move) {
+					//std::cout << "World Manager returning " << std::endl;
+					return -1;
+				}
+			}
+		}
 
-			}//No collisions
-		}//Not solid
-
+		//p_o->setPosition(where);
 		Vector prev_pos = p_o->getPosition();
 		p_o->setPosition(where);
 
 		//Check for out of bounds
-		bool out;
+		bool out = false;
 		DisplayManager& displaymanager = DisplayManager::getInstance();
 		int xBorder = displaymanager.getHorizontal();
 		int yBorder = displaymanager.getVertical();
-		if (prev_pos.getX() >= 0 && where.getX() < 0) {
+		//std::cout << "World Manager location: " << prev_pos.getX() << " " << where.getX() << std::endl;
+		
+		if (where.getX() < 0) {
 			out = true; //Went out the left side
 		}
 		else if (prev_pos.getX() <= xBorder && where.getX() > xBorder) {
@@ -182,6 +207,7 @@ namespace df {
 			out = true; //Went out the bottom side
 		}
 		if (out == true) {
+		//	printf("out of bounds\n");
 			EventOut ov = EventOut();
 			p_o->eventHandler(&ov);
 		}

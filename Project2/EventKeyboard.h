@@ -14,7 +14,7 @@ namespace df {
 		UNDEFINED_KEYBOARD_ACTION = -1, // Undefined
 		KEY_PRESSED,                    // Was down
 		KEY_RELEASED,                   // Was released
-		KEY_DOWN,                       // Is down
+		KEY_DOWN                       // Is down
 	};
 
 	// Keys Dragonfly recognizes.

@@ -25,7 +25,6 @@ namespace df {
 		}
 		return false;
 	}
-
 	void ObjectList::clear() {
 		m_count = 0;
 	}

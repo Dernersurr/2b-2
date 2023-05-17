@@ -31,8 +31,9 @@ Explosion::Explosion() {
 // Return 0 if ignored, else 1.
 int Explosion::eventHandler(const df::Event* p_e) {
 
-    if (p_e->getType() == df::STEP_EVENT) {
+    if (p_e->getType() == STEP_EVENT) {
         step();
+        time_to_live--;
         return 1;
     }
 

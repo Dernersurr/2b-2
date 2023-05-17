@@ -4,6 +4,7 @@
 #include "ObjectList.h"
 #include "Object.h"
 #include "ObjectListIterator.h"
+#include <iostream>
 
 namespace df {
 	Manager::Manager() {
@@ -32,9 +33,13 @@ namespace df {
 
 		ObjectList all_objects = WorldManager::getInstance().getAllObjects();
 		ObjectListIterator li(&all_objects);
+		
 		for(li.first();!li.isDone();li.next()){
+			std::cout << count << " " << std::endl;
+			std::cout << "Manager is " << p_event->getType() << std::endl;
 			li.currentObject()->eventHandler( p_event);
-			li.next();
+
+			//li.next();
 			count++;
 		};
 

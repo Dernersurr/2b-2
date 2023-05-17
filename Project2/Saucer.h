@@ -4,6 +4,7 @@
 
 #include "EventCollision.h"
 #include "Object.h"
+#include "EventStep.h"
 
 #define SAUCER_CHAR 'O'
 

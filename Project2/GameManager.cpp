@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <iostream>
 
 #include "GameManager.h"
 #include "LogManager.h"
@@ -9,7 +10,7 @@
 #include "DisplayManager.h"
 #include "Manager.h"
 #include "Hero.h"
-
+#include "InputManager.h"
 
 namespace df {
 	GameManager::GameManager() {
@@ -52,28 +53,73 @@ namespace df {
 		int loop_time;
 		int loop_num = 1;
 		WorldManager& world_manager = WorldManager::getInstance();
-
+		WM.startUp();
+		IM.startUp();
 		while (!game_over) {
 			clock.delta();
 			// Get input
 			// Update world state
-			world_manager.update();
+			
+			IM.getInput();
+				//printf("IM get good\n");
+			
+			//onEvent(&s);
+				//printf("WM update good\n");
+			//WM.draw();
+				//printf("WM draw good\n");
+			DM.swapBuffers();
+			WM.draw();
+			WM.update();
+			
+				//printf("DM swapped buffers\n");
+			//printf("after update\n");
 			// Send each object a Step Event
 			ObjectList allObjects = world_manager.getAllObjects();
 			EventStep s(loop_num);
 			ObjectListIterator iterator(&allObjects);
+			//STEP_EVENT;
+			
+			//printf("before loop\n");
 			while (!iterator.isDone()) {
-				iterator.currentObject()->eventHandler(&s);
-				iterator.next();
+				//std::cout << "GameManager Event is " << s.getType() << std::endl;
+				WM.moveObject(iterator.currentObject(), iterator.currentObject()->getPosition());
+				 //make a loop through WM's deletions. If the current object IS on that list, remove it.
+					if(WM.markForDelete(iterator.currentObject()) == 1) {
+						WM.removeObject(iterator.currentObject());
+						printf("object removed\n");
+						//WM.update();
+						//iterator.next();
+					}
+					else {
+						//std::cout << "GameManager Event is " << s.getType() << std::endl;
+						iterator.currentObject()->eventHandler(&s);
+						iterator.next();
+						//printf("bottom of done loop\n");
+					}
 			}
 			// Draw current scene to back buffer
 			// Swap back buffer to current buffer
-			if (loop_num == 165) {
+			/*if (loop_num == 165) {
+				printf("GAME OVER\n");
+				game_over = true;
 				setGameOver();
-			}
+			}*/
 			loop_num++;
 			loop_time = clock.split();
-			Sleep(FRAME_TIME_DEFAULT - loop_time);
+			//printf("just before sleep\n");
+			//printf(" %d\n", FRAME_TIME_DEFAULT);
+			//printf("%d\n", loop_time);
+			int sleeptime;
+			sleeptime = FRAME_TIME_DEFAULT - loop_time;
+			if (sleeptime < 0) {
+				sleeptime = sleeptime * -1;
+			}
+			if (sleeptime > 100) {
+				sleeptime = 100;
+			}
+			//printf("Sleep Time = %d\n", sleeptime);
+			Sleep(sleeptime);
+			//printf("after sleep\n");
 		}
 
 	}

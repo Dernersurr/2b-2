@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "EventKeyboard.h"
 #include "Manager.h"
-
+#define IM df :: InputManager::getInstance()
 namespace df {
 	class InputManager : public Manager {
 

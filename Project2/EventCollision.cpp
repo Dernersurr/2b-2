@@ -8,6 +8,7 @@ df::EventCollision::EventCollision(df::Object* p_o1, df::Object* p_o2, Vector p)
 	m_p_obj1 = p_o1;
 	m_p_obj2 = p_o2;
 	m_pos = p;
+	setType(COLLISION_EVENT);
 }
 
 df::EventCollision::EventCollision() : df::EventCollision::EventCollision(nullptr, nullptr, df::Vector()) {}

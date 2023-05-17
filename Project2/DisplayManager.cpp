@@ -117,8 +117,10 @@ namespace df {
                 text.setFillColor(color);
                 text.setFont(*font);
                 text.setPosition(world_pos.getX(),world_pos.getY());
+                text.setCharacterSize(48);
+                text.setStyle(sf::Text::Bold);
                 p_window->draw(text);
-                LM.writeLog("Successfully drew a thing");
+               // LM.writeLog("Successfully drew a thing");
                 return 0;
             }
     };
@@ -128,12 +130,14 @@ namespace df {
         if (p_window == NULL) {
             return -1;
         }
-        // Display current window.
-        p_window->display();
-        // Clear window to get ready for next draw.
-        p_window->clear();
+        else {
+            // Display current window.
+            p_window->display();
+            // Clear window to get ready for next draw.
+            p_window->clear();
 
-        return 0; // Success.
+            return 0; // Success.
+        }
     }
 
     int DisplayManager::clear() {

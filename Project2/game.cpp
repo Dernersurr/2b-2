@@ -14,6 +14,7 @@
 #include "Hero.h"
 #include "Saucer.h"
 #include "Star.h"
+#include "Reticle.h"
 
 // Function prototypes.
 void populateWorld(void);
@@ -35,15 +36,14 @@ int main(int argc, char* argv[]) {
     //DM.drawString(df::Vector(10, 3), "Hello World", df::Justification::CENTER_JUSTIFIED, sf::Color::Black);
     WM.draw();
     DM.swapBuffers();
-
     //DM.drawCh(df::Vector(10, 6), '*', sf::Color::Black);
     //DM.swapBuffers();
     //DM.display();
-    
+    printf("game start");
     GM.run();
     //Sleep(5000);  // Use Sleep(2000) in Windows.
     LM.setFlush(true);
-    DM.shutDown();
+    //DM.shutDown();
 //parent of ce413f0 (DisplayManager Needs to work)
     //LM.shutDown();
 
@@ -84,15 +84,13 @@ void populateWorld(void) {
 
     // Spawn some Stars.
     for (int i = 0; i < 16; i++) {
-        Star* s = new Star;
-       s->draw();
-      
+        new Star;
     }
     // Create hero.
-   Hero* h = new Hero;
-   h->draw();
-
-    // Spawn some saucers to shoot.
-    for (int i = 0; i < 16; i++)
-        new Saucer;
+    new Hero;
+    //new Reticle;
+    //Spawn some saucers to shoot.
+    //for (int i = 0; i < 4; i++)
+    new Saucer;
+    //}
 }

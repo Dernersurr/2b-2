@@ -7,10 +7,10 @@
 
 #include "Event.h"
 #include "Object.h"
-
+#define COLLISION_EVENT "df::collision"
 namespace df {
 
-	const std::string COLLISION_EVENT = "df-collision";
+	//const std::string COLLISION_EVENT = "df-collision";
 
 	class EventCollision : public Event {
 
