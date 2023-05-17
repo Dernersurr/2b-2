@@ -1,0 +1,165 @@
+//
+// Saucer.cpp
+//
+
+// Uncomment if Dragonfly uses STL instead of ObjectList.
+//#define USE_STL
+
+//#include <stdlib.h>		// for rand()
+//#ifdef USE_STL
+//#include <vector>
+//#endif
+
+// Engine includes.
+#include "DisplayManager.h"
+#include "EventCollision.h"
+#include "EventNuke.h"
+#include "EventOut.h"
+#include "LogManager.h"
+#include "WorldManager.h"
+#include "EventStep.h"
+#include "Vector.h"
+#include <iostream>
+
+// Game includes.
+#include "Explosion.h"
+#include "Saucer.h"
+#include "Hero.h"
+#include "Bullet.h"
+
+
+Saucer::Saucer() {
+
+    // Set object type.
+    setType("Saucer");
+
+    // Set speed in horizontal direction.
+    setVelocity(df::Vector(-0.5, 0)); // 1 space left every 4 frames
+    setSpeed(15.5);
+    setDirection(df::Vector(-1.0, 0));
+    setSolidness(df::HARD);
+    moveToStart();
+
+    // Register interest in "nuke" event.
+#ifdef DF_REGISTER_INTEREST
+    registerInterest(NUKE_EVENT);
+#endif
+}
+
+// Handle event.
+// Return 0 if ignored, else 1.
+int Saucer::eventHandler(const df::Event* p_e){ 
+    //std::cout << "**************************Saucer Event Handler " << p_e->getType() << "" << std::endl;
+    if (p_e->getType() == COLLISION_EVENT) {
+        const df::EventCollision* p_collision_event = dynamic_cast <const df::EventCollision*> (p_e);
+        hit(p_collision_event);
+        return 1;
+    }
+    else if(p_e->getType() == NUKE_EVENT) {
+
+        // Create explosion.
+        Explosion* p_explosion = new Explosion;
+        p_explosion->setPosition(this->getPosition());
+
+        // Delete self.
+        WM.markForDelete(this);
+
+        // Saucers appear stay around perpetually
+        /*new Saucer;*/
+    } 
+    else if (p_e->getType() == df::OUT_EVENT) {
+        out();
+        return 1;
+    }
+    else if (p_e->getType() == STEP_EVENT) {
+        df::Vector pos = getPosition();
+        pos.setX(pos.getX() - 0.25);
+        //WM.moveObject(df::Object(), pos);
+        setPosition(pos);
+        WM.moveObject(this, pos);
+        /*if (WM.isCollision(this, pos) = WM.getCollisions(this, pos)) {
+            const df::EventCollision* p_collision_event = dynamic_cast <const df::EventCollision*> (p_e);
+            hit(p_collision_event);
+        }*/
+        //  printf("Saucer successfully moved to: %f %f\n", pos.getX(), pos.getY());
+
+        return 1;
+    }
+    // If get here, have ignored this event.
+    return 0;
+}
+
+// If moved off left edge, move back to far right.
+void Saucer::out() {
+
+    // If haven't moved off left edge, then nothing to do.
+    if (getPosition().getX() >= 0)
+        return;
+
+    // Otherwise, move back to far right.
+    moveToStart();
+
+    // Spawn new Saucer to make the game get harder.
+    new Saucer;
+
+}
+
+// If saucer and player collide, mark both for deletion.
+void Saucer::hit(const df::EventCollision* p_c) {
+    printf("Hit Method Called!!!!!!!!!\n");
+    
+    // If Saucer on Saucer, ignore.
+    if ((p_c->getObject1()->getType() == "Saucer") &&
+        (p_c->getObject2()->getType() == "Saucer"))
+        return;
+
+    // If Bullet ...
+    else if ((p_c->getObject1()->getType() == "Bullet") ||
+        (p_c->getObject2()->getType() == "Bullet")) {
+
+        // Create an explosion.
+        Explosion* p_explosion = new Explosion;
+        p_explosion->setPosition(this->getPosition());
+
+        // Saucers appear stay around perpetually.
+        new Saucer;
+    }
+
+    // If Hero, mark both objects for destruction.
+    else if (((p_c->getObject1()->getType()) == "Hero") ||
+        ((p_c->getObject2()->getType()) == "Hero")) {
+        WM.markForDelete(p_c->getObject1());
+        WM.markForDelete(p_c->getObject2());
+    }
+
+}
+
+// Move saucer to starting location on right side of screen.
+void Saucer::moveToStart() {
+    df::Vector temp_pos;
+
+    // Get world boundaries.
+    int world_horiz = (int)DM.getHorizontal();
+    int world_vert = (int)DM.getVertical();
+
+    // x is off right side of screen.
+    temp_pos.setX(world_horiz + rand() % world_horiz + 3.0f);
+
+    // y is in vertical range.
+    temp_pos.setY(rand() % (world_vert)+0.0f);
+
+    // If collision, move right slightly until empty space.
+
+    df::ObjectList collision_list = WM.getCollisions(this, temp_pos);
+    while (!collision_list.isEmpty()) {
+        temp_pos.setX(temp_pos.getX() + 1.0f);
+        collision_list = WM.getCollisions(this, temp_pos);
+    }
+    WM.moveObject(this, temp_pos);
+}
+
+int Saucer::draw() {
+    DM.drawCh(getPosition(), SAUCER_CHAR, sf::Color::Green);
+    //printf("Saucer drawn");
+    return 0;
+}
