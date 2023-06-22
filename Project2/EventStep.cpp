@@ -1,4 +1,4 @@
-
+#include "WorldManager.h"
 #include "EventStep.h"
 
 namespace df {
@@ -11,6 +11,7 @@ namespace df {
 	EventStep::EventStep(int init_step_count) {
 		setType(STEP_EVENT);
 		m_step_count = init_step_count;
+		//WM.update();
 	}
 
 	void EventStep::setStepCount(int new_step_count) {

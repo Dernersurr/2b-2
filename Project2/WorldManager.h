@@ -19,6 +19,7 @@ namespace df {
 		void operator=(WorldManager const&);
 		ObjectList updates;
 		ObjectList deletions;
+		int markForDelete(Object* p_o);
 	public:
 		static WorldManager& getInstance();
 		int startUp();
@@ -39,7 +40,7 @@ namespace df {
 
 		int moveObject(Object* p_o, Vector where);
 
-		int markForDelete(Object* p_o);
+		
 
 		ObjectList getCollisions(Object* p_o, Vector where) const;
 

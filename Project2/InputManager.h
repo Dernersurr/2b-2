@@ -29,7 +29,9 @@ namespace df {
 		// Get input from the keyboard and mouse.
 		// Pass event along to all Objects.
 		void getInput();
+
+
 	};
-#pragma once
+	Keyboard::Key sfmlKeyToDfKey(sf::Keyboard::Key);
 }
 #endif

@@ -44,10 +44,10 @@ namespace df {
 		return 0;
 	}
 	int WorldManager::removeObject(Object* p_o) {
-		updates.remove(p_o);
 		markForDelete(p_o);
+		updates.remove(p_o);
 		LogManager& log_manager = LogManager::getInstance();
-		printf("Object removed from WorldManager");
+		//printf("Object removed from WorldManager!!!!!!!!!!!!");
 		log_manager.writeLog("Object removed from WorldManager");
 		return 0;
 	}
@@ -82,7 +82,7 @@ namespace df {
 	    ObjectListIterator del_list_iter(&deletions);
 		for (del_list_iter.first(); !del_list_iter.isDone(); del_list_iter.next()) {
 			delete del_list_iter.currentObject();
-			printf("DDDDDDDDDDDDDDDDDDDDDD deleted object\n");
+			//printf("DDDDDDDDDDDDDDDDDDDDDD deleted object\n");
 		}
 		deletions.clear();
 	}
@@ -91,13 +91,13 @@ namespace df {
 		ObjectListIterator iterator(&deletions);
 		while (!iterator.isDone()) {
 			if (iterator.currentObject() == p_o) {
-				deletions.insert(p_o);
-				printf("object inserted to deletions\n");
-				return 1;
+				return 0;
 			}
 			iterator.next();
-		}
-		return 0;
+			}
+		deletions.insert(p_o);
+		//printf("object inserted to deletions\n");
+		return 1;
 	}
 	void df::WorldManager::draw() {
 		ObjectListIterator list_iter(&updates);
@@ -111,10 +111,10 @@ namespace df {
 		}
 	}
 	bool positionsIntersect(Vector p1, Vector p2) {
-		if (p1.getX() == (p2.getX() + 5) && p1.getY() == (p2.getY() + 10) ||
-			(p1.getX() == (p2.getX() + 5) && p1.getY() == (p2.getY() - 10) ||
-			(p1.getX() == (p2.getX() - 5) && p1.getY() == (p2.getY() + 10) ||
-				(p1.getX() == (p2.getX() - 5) && p1.getY() == (p2.getY() - 10))))) {
+		//std::cout <<"Vector of P1 = "<< p1.getX()<<" "<< p1.getY()<<std::endl;
+		//std::cout << "Vector of P2 = " << p2.getX() << " " << p2.getY() << std::endl;
+		if ((abs(p1.getX() - p2.getX()) <= 20) && abs(p1.getY() - p2.getY()) <= 20) { /*can be reduced to 10 and 10?*/
+			//printf("Positions intersectPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP\n");
 			return true;
 		}
 		else {
@@ -127,9 +127,17 @@ namespace df {
 		ObjectListIterator updates_list_iter(&updates);
 		for (updates_list_iter.first(); !updates_list_iter.isDone(); updates_list_iter.next()) {
 			Object* p_temp_o = updates_list_iter.currentObject();
-			if (p_temp_o != p_o) {
-				if (positionsIntersect(p_temp_o->getPosition(), where) && p_temp_o->isSolid()) {
-					collisionList.insert(p_temp_o);
+			if (p_temp_o->getSolidness() != df::SPECTRAL) {
+				if (p_temp_o != p_o) {
+					if ((p_o->getType() == "Bullet" && p_temp_o->getType() == "Saucer") ||
+						(p_o->getType() == "Hero" && p_temp_o->getType() =="Saucer")) {
+						//std::cout << p_temp_o->getType() << " " << p_o->getType() << std::endl;
+						
+					if (positionsIntersect(p_temp_o->getPosition(), where) && p_temp_o->isSolid()) {
+						collisionList.insert(p_temp_o);
+						//printf("Collision took place\n");
+					}
+					}
 				}
 			}
 		}
@@ -172,14 +180,16 @@ namespace df {
 					p_temp_o->eventHandler(&c);
 
 					if (p_o->getSolidness() == Solidness::HARD && p_temp_o->getSolidness() == Solidness::HARD) {
+						getCollisions(p_o, where);
+						getCollisions(p_temp_o, where);
 						will_move = false;
 						//printf("Will Move is false\n");
 					}
 				}
-				if (!will_move) {
-					//std::cout << "World Manager returning " << std::endl;
-					return -1;
-				}
+				//if (!will_move) {
+				//	//std::cout << "World Manager returning " << std::endl;
+				//	return -1;
+				//}
 			}
 		}
 

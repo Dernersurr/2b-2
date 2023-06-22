@@ -8,6 +8,7 @@
 #include "GameManager.h"
 #include "LogManager.h"
 #include "WorldManager.h"
+#include "Object.h"
 
 // Game includes.
 #include "DisplayManager.h"
@@ -20,11 +21,11 @@ GameOver::GameOver() {
     // Put in center of screen.
     int world_horiz = (int)DM.getHorizontal();
     int world_vert = (int)DM.getVertical();
-    df::Vector p((float)(world_horiz / 2.0f), (float)(world_vert / 2.0f));
+    df::Vector p((float)(world_horiz / 2.0f), (float)((world_vert / 2.0f))+5);
     setPosition(p);
 
     // Exit after about 3 seconds.  
-    time_to_live = 100;
+    time_to_live = 30;
 
     // Make like a View Object
     setSolidness(df::SPECTRAL);
@@ -53,12 +54,13 @@ int GameOver::eventHandler(const df::Event* p_e) {
 void GameOver::step() {
     time_to_live--;
     if (time_to_live <= 0) {
-        WM.markForDelete(this);
+        WM.removeObject(this);
         GM.setGameOver();
     }
 }
 
 int GameOver::draw() {
     DM.drawString(getPosition(), "Game Over!", df::CENTER_JUSTIFIED, sf::Color::White);
+   // printf("Drew the GAME OVER!\n");
     return 0;
 }

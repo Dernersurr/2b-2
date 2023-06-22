@@ -1,5 +1,6 @@
 #include "EventMouse.h"
-
+#include <SFML/Window/Export.hpp>
+#include <SFML/System/Vector2.hpp>
 df::EventMouse::EventMouse() {
 	setType(MOUSE);
 	mouse_action = df::EventMouseAction::UNDEFINED_MOUSE_ACTION;

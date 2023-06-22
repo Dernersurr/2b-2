@@ -155,7 +155,7 @@ namespace df {
 
         switch (just) {
         case CENTER_JUSTIFIED:
-            starting_pos.setX(world_pos.getX() - str.size() / static_cast<float>(2));
+            starting_pos.setX(world_pos.getX() - (20*str.size()) / static_cast<float>(2));
             break;
         case RIGHT_JUSTIFIED:
             break;
@@ -166,11 +166,12 @@ namespace df {
 
         int success = 0;
         for (int i = 0; i < str.size(); i++) {
-            Vector temp(starting_pos.getX() + i, starting_pos.getY());
+            Vector temp(starting_pos.getX() + (i*20), starting_pos.getY());
             success+=DM.drawCh(temp, str.at(i), color);
         }
 
         if (success == 0) {
+            //printf("succesffully drew string\n");
             return 0;
         }
         else {
