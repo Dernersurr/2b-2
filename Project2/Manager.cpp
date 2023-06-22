@@ -35,8 +35,8 @@ namespace df {
 		ObjectListIterator li(&all_objects);
 		
 		for(li.first();!li.isDone();li.next()){
-			std::cout << count << " " << std::endl;
-			std::cout << "Manager is " << p_event->getType() << std::endl;
+			//std::cout << count << " " << std::endl;
+			//std::cout << "Manager is " << p_event->getType() << std::endl;
 			li.currentObject()->eventHandler( p_event);
 
 			//li.next();

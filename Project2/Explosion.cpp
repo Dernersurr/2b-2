@@ -9,6 +9,7 @@
 #include "LogManager.h"
 #include "WorldManager.h"
 
+#include <iostream>
 // Game includes.
 #include "Explosion.h"
 
@@ -30,10 +31,10 @@ Explosion::Explosion() {
 // Handle event.
 // Return 0 if ignored, else 1.
 int Explosion::eventHandler(const df::Event* p_e) {
-
+    std::cout << "Explosion Recieved: " << p_e->getType() << std::endl;
     if (p_e->getType() == STEP_EVENT) {
         step();
-        time_to_live--;
+        //time_to_live--;
         return 1;
     }
 
@@ -44,8 +45,12 @@ int Explosion::eventHandler(const df::Event* p_e) {
 // Count down until explosion finished.
 void Explosion::step() {
     time_to_live--;
+    printf("%d\n", time_to_live);
     if (time_to_live <= 0)
-        WM.markForDelete(this);
+        WM.removeObject(this);
+    printf("Marked for deletion\n");
+    //WM.update();
+    //DM.swapBuffers();
 }
 
 int Explosion::draw() {

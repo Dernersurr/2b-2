@@ -17,6 +17,7 @@
 #include "GameOver.h"
 #include "Hero.h"
 #include "Vector.h"
+#include "Reticle.h"
 #include <iostream>
 
 
@@ -74,17 +75,17 @@ int Hero::eventHandler(const df::Event* p_e) {
         printf
     }*/
     if (p_e->getType() == df::KEYBOARD_EVENT) {
-        std::cout << "p_kybrd_evnt:" << p_e->getType() << std::endl;
+        //std::cout << "p_kybrd_evnt:" << p_e->getType() << std::endl;
         const df::EventKeyboard* p_keyboard_event = dynamic_cast <const df::EventKeyboard*> (p_e);
         kbd(p_keyboard_event);
-        printf("Key Pressed\n");
+        //printf("Key Pressed\n");
         return 1;
     }
 
     else if (p_e->getType() == df::MOUSE) {
         const df::EventMouse* p_mouse_event = dynamic_cast <const df::EventMouse*> (p_e);
         mouse(p_mouse_event);
-        printf("Mouse Event\n");
+        //printf("Mouse Event\n");
         return 1;
     }
 
@@ -99,11 +100,14 @@ int Hero::eventHandler(const df::Event* p_e) {
 
 // Take appropriate action according to mouse action.
 void Hero::mouse(const df::EventMouse* p_mouse_event) {
+    //std::cout << "Mouse Event Type: " << p_mouse_event->getMouseAction() << " "<< df::CLICKED<< std::endl;
+   // std::cout << "Mouse Event Button: " << p_mouse_event->getMouseButton() << " "<< df::LEFT<< std::endl;
 
-    // Pressed button?
+        // Pressed button?
     if ((p_mouse_event->getMouseAction() == df::CLICKED) &&
-        (p_mouse_event->getMouseButton() == df::LEFT))
+        (p_mouse_event->getMouseButton() == df::LEFT)) {
         fire(p_mouse_event->getMousePosition());
+    }
 }
 
 // Take appropriate action according to key pressed.
@@ -130,7 +134,7 @@ void Hero::kbd(const df::EventKeyboard* p_keyboard_event) {
         break;
     case df::Keyboard::Q:			// quit
         if (p_keyboard_event->getKeyboardAction() == df::KEY_PRESSED)
-            WM.markForDelete(this);
+            WM.removeObject(this);
         break;
     };
 
@@ -158,23 +162,30 @@ void Hero::move(int dy) {
 // Fire bullet towards target.
 void Hero::fire(df::Vector target) {
 
+    int b = this->getPosition().getY();
     // See if time to fire.
-  /*  if (fire_countdown > 0)
+    if (fire_countdown > 0)
         return;
-    fire_countdown = fire_slowdown;*/
+    fire_countdown = fire_slowdown;
 
     // Fire Bullet towards target.
-    Bullet* p = new Bullet(getPosition());
-    p->setVelocity(df::Vector(p->getVelocity().getX(),
+    Bullet* p = new Bullet(getPosition(), p_reticle->getPosition());
+   
+    //p->setDirection(df::Vector(run, rise));
+    //std::cout << p->getDirection() << std::endl;
+  /*  p->setVelocity(df::Vector(p->getVelocity().getX(),
         (target.getY() - getPosition().getY()) /
-        (target.getX() - getPosition().getX())));
+        (target.getX() - getPosition().getX())));*/
+    WM.insertObject(p);
+    //printf("Bullet fired\n");
 }
 
 // Decrease fire restriction.
 void Hero::step() {
-    //fire_countdown--;
-    //if (fire_countdown < 0)
-      //  fire_countdown = 0;
+    fire_countdown--;
+    //printf("Fire Cooldown:%d\n", fire_countdown);
+    if (fire_countdown < 0)
+       fire_countdown = 0;
 }
 
 // Send nuke event to all objects.

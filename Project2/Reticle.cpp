@@ -36,13 +36,14 @@ Reticle::Reticle() {
 int Reticle::eventHandler(const df::Event* p_e) {
     
     if (p_e->getType() == df::MOUSE) {
-        std::cout << "recticle eventHandler called " << p_e->getType() << std::endl;
+        //std::cout << "recticle eventHandler called " << p_e->getType() << std::endl;
         //printf("reticle eventHandler is mouse ***********\n");
         const df::EventMouse* p_mouse_event = dynamic_cast <const df::EventMouse*> (p_e);
         if (p_mouse_event->getMouseAction() == df::MOVED) {
-            //printf("reticle eventHandler mouse moved !!!!!!!!!!!!!!!!\n");
+           //printf("reticle eventHandler mouse moved !!!!!!!!!!!!!!!!\n");
             // Change location to new mouse position.
             setPosition(p_mouse_event->getMousePosition());
+            
             return 1;
         }
     }

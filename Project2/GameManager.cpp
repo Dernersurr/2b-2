@@ -49,6 +49,7 @@ namespace df {
 	}
 	//this one took me forever to figure out
 	void GameManager::run() {
+		DM.swapBuffers();
 		Clock clock;
 		int loop_time;
 		int loop_num = 1;
@@ -61,7 +62,7 @@ namespace df {
 			// Update world state
 			
 			IM.getInput();
-				//printf("IM get good\n");
+				
 			
 			//onEvent(&s);
 				//printf("WM update good\n");
@@ -69,8 +70,10 @@ namespace df {
 				//printf("WM draw good\n");
 			DM.swapBuffers();
 			WM.draw();
-			WM.update();
+			//printf("Looping Good: %d\n", loop_num);
 			
+			WM.update();
+
 				//printf("DM swapped buffers\n");
 			//printf("after update\n");
 			// Send each object a Step Event
@@ -84,19 +87,12 @@ namespace df {
 				//std::cout << "GameManager Event is " << s.getType() << std::endl;
 				WM.moveObject(iterator.currentObject(), iterator.currentObject()->getPosition());
 				 //make a loop through WM's deletions. If the current object IS on that list, remove it.
-					if(WM.markForDelete(iterator.currentObject()) == 1) {
-						WM.removeObject(iterator.currentObject());
-						printf("object removed\n");
-						//WM.update();
-						//iterator.next();
-					}
-					else {
 						//std::cout << "GameManager Event is " << s.getType() << std::endl;
 						iterator.currentObject()->eventHandler(&s);
 						iterator.next();
 						//printf("bottom of done loop\n");
-					}
 			}
+			
 			// Draw current scene to back buffer
 			// Swap back buffer to current buffer
 			/*if (loop_num == 165) {
