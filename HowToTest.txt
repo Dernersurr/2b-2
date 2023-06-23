@@ -1,6 +1,0 @@
-Opening the project snl and simply running the game is enough. Test cases were made and disposed of (to make room for new log messages) when needed during development.
-
-Testing took over 5 months
-
-
-SFML 2.5 is required to run, and changes to the addresses of lib and input directories may need to be made to match with machine.
